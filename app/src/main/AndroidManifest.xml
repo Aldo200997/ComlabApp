@@ -19,7 +19,8 @@
         <activity
             android:name=".ReferenceActivity"
             android:label="@string/title_activity_reference"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".CreateAccountActivity"></activity>
     </application>
 
 </manifest>
