@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ComlabApp</string>
+    <string name="title_activity_reference">ReferenceActivity</string>
+    <string name="login_email_str">Correo electrónico</string>
+    <string name="login_password_str">Contraseña</string>
+    <string name="login_button_str">Iniciar sesión</string>
+    <string name="login_register_str">Registrarse</string>
+
 </resources>
