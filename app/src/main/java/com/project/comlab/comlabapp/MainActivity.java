@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.project.comlab.comlabapp.Activities.CreateAccountActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn_register;

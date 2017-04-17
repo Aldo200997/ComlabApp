@@ -1,8 +1,10 @@
-package com.project.comlab.comlabapp;
+package com.project.comlab.comlabapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.project.comlab.comlabapp.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
