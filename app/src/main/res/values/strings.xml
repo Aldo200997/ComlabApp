@@ -6,4 +6,10 @@
     <string name="login_button_str">Iniciar sesión</string>
     <string name="login_register_str">Registrarse</string>
 
+    <string name="create_account_email_repeat_str">Repetir correo electrónico</string>
+    <string name="create_account_username_str">Nombre de usuario</string>
+    <string name="create_account_password_repeat_str">Repetir contraseña</string>
+    <string name="create_account_register_str">Registrarme!</string>
+    <string name="create_account_toolbar_str">Crear cuenta</string>
+
 </resources>
