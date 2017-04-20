@@ -27,7 +27,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Activities.InterestedActivity"></activity>
+        <activity android:name=".Activities.InterestedActivity" />
+        <activity android:name=".Activities.ContainerActivity"></activity>
     </application>
 
 </manifest>

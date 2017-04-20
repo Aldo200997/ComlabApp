@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tabs>
+
+    <tab
+        id="@+id/contributes"
+        title="Aportes"
+        icon="@drawable/news"
+        barColorWhenSelected="@color/colorPrimary"/>
+
+    <tab
+        id="@+id/events"
+        title="Eventos"
+        icon="@drawable/events"
+        barColorWhenSelected="@color/colorPrimary"/>
+
+    <tab
+        id="@+id/projects"
+        title="Proyectos"
+        icon="@drawable/projects"
+        barColorWhenSelected="@color/colorPrimary"/>
+
+    <tab
+        id="@+id/profile"
+        title="Perfil"
+        icon="@drawable/profile"
+        barColorWhenSelected="@color/colorPrimary"/>
+
+
+
+
+
+</tabs>
