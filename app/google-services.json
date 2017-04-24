@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "613921305622",
+    "firebase_url": "https://comlabapplication.firebaseio.com",
+    "project_id": "comlabapplication",
+    "storage_bucket": "comlabapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613921305622:android:30e8f2059c8faefe",
+        "android_client_info": {
+          "package_name": "com.project.comlab.comlabapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613921305622-nv8jmr7ro107d0qdck914953oup6vnp1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOufD0ujofl0LwE7pWXF0bU7k6SCGUDas"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
