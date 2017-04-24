@@ -46,7 +46,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -57,22 +57,34 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/bd"
+        android:src="@drawable/google"
         android:layout_gravity="center|top"
-        android:layout_marginTop="30dp"
-        android:elevation="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="20dp"
         app:layout_behavior="com.zoonref.SimpleViewBehavior"
         app:dependsOn="@+id/appbar"
         app:dependType="y"
         app:dependTargetY="-180dp"
-        app:targetX="30dp"
-        app:targetY="5dp"
+        app:targetX="10dp"
+        app:targetY="7dp"
         app:targetWidth="40dp"
         app:targetHeight="40dp"/>
 
-   
-
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="18dp"
+        android:elevation="10dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="-100dp"
+        android:textColor="@color/white"
+        app:layout_behavior="com.zoonref.SimpleViewBehavior"
+        android:alpha="0"
+        app:dependsOn="@+id/appbar"
+        app:dependType="y"
+        app:dependTargetY="-180dp"
+        app:targetY="15dp"
+        app:targetAlpha="1"/>
 
 </android.support.design.widget.CoordinatorLayout>
