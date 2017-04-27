@@ -38,17 +38,19 @@
                 android:padding="8dp">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/EditTextWhite">
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/login_username"
+                        android:id="@+id/login_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/login_email_str" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/EditTextWhite">
@@ -69,12 +71,29 @@
                     android:layout_marginTop="20dp"/>
 
                 <Button
+                    android:id="@+id/signOut_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar sesión"
+                    android:theme="@style/RaisedButton"
+                    android:layout_marginTop="5dp"/>
+
+                <Button
                     android:id="@+id/login_button_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/login_register_str"
                     android:theme="@style/RaisedButton"
                     android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/login_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:text="Estado"/>
 
             </LinearLayout>
 
