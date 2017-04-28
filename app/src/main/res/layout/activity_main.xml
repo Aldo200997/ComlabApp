@@ -71,6 +71,14 @@
                     android:layout_marginTop="20dp"/>
 
                 <Button
+                    android:id="@+id/login_go"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ir a inicio"
+                    android:theme="@style/RaisedButton"
+                    android:layout_marginTop="5dp"/>
+
+                <Button
                     android:id="@+id/signOut_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

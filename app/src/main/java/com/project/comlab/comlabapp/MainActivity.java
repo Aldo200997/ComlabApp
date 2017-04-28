@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_register;
     Button btn_login;
     Button btn_signOut;
+    Button btn_go;
     TextView tv_state;
     private FirebaseAuth mAuth;
     TextInputEditText et_email, et_password;
@@ -35,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+
         tv_state = (TextView) findViewById(R.id.login_state);
+
         btn_register = (Button) findViewById(R.id.login_button_register);
         btn_login = (Button) findViewById(R.id.login_button);
         btn_signOut = (Button) findViewById(R.id.signOut_button);
+        btn_go = (Button) findViewById(R.id.login_go);
+
         la_email = (TextInputLayout) findViewById(R.id.layout_email);
         la_password = (TextInputLayout) findViewById(R.id.layout_password);
         et_email = (TextInputEditText) findViewById(R.id.login_email);
@@ -102,13 +107,21 @@ public class MainActivity extends AppCompatActivity {
     private void updateState(){
         FirebaseUser user = mAuth.getCurrentUser();
 
-
         if(user != null){
-            tv_state.setText("Sesión iniciada " + user.getEmail());
+            tv_state.setText("Sesión iniciada " + user.getDisplayName());
             btn_login.setVisibility(View.GONE);
             btn_signOut.setVisibility(View.VISIBLE);
             la_email.setVisibility(View.GONE);
             la_password.setVisibility(View.GONE);
+            btn_register.setVisibility(View.GONE);
+            btn_go.setVisibility(View.VISIBLE);
+            btn_go.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, ContainerActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
         }else{
@@ -117,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
             btn_login.setVisibility(View.VISIBLE);
             la_email.setVisibility(View.VISIBLE);
             la_password.setVisibility(View.VISIBLE);
+            btn_register.setVisibility(View.VISIBLE);
+            btn_go.setVisibility(View.GONE);
 
 
         }
@@ -125,5 +140,10 @@ public class MainActivity extends AppCompatActivity {
     private void signOut(){
         mAuth.signOut();
         updateState();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
