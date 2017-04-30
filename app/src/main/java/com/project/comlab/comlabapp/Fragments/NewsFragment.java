@@ -1,7 +1,9 @@
 package com.project.comlab.comlabapp.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.project.comlab.comlabapp.Activities.AddNewActivity;
+import com.project.comlab.comlabapp.Activities.ContainerActivity;
 import com.project.comlab.comlabapp.Adapters.RecyclerNewsAdapter;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
@@ -27,6 +31,8 @@ import java.util.List;
 public class NewsFragment extends Fragment {
 
 
+
+
     public NewsFragment() {
         // Required empty public constructor
     }
@@ -36,6 +42,7 @@ public class NewsFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     List<NewsModel> newsList;
+    FloatingActionButton fab;
 
 
 
@@ -43,16 +50,31 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddNewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // RecyclerView
         rv_news = (RecyclerView) view.findViewById(R.id.rv_news);
         rv_news.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         newsList = new ArrayList<>();
 
+        // Firebase
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
 
+        // Adapter RV
         adapter = new RecyclerNewsAdapter(newsList);
         rv_news.setAdapter(adapter);
 
+
+        // Firebase Listener
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -61,9 +83,7 @@ public class NewsFragment extends Fragment {
                     NewsModel news = snap.getValue(NewsModel.class);
                     newsList.add(news);
                 }
-
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override

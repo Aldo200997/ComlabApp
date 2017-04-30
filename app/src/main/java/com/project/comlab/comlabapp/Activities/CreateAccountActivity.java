@@ -85,12 +85,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
                                     updateProfile();
-
-
                                 }else{
                                     Toast.makeText(getApplicationContext(), "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
                                 }
-
 
                             }
                         });
@@ -108,7 +105,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-
                             Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

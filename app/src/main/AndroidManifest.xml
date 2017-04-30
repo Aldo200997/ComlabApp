@@ -28,7 +28,10 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Activities.InterestedActivity" />
-        <activity android:name=".Activities.ContainerActivity"></activity>
+        <activity android:name=".Activities.ContainerActivity" />
+        <activity android:name=".Activities.AddNewActivity" />
+        <activity android:name=".Activities.AddEventActivity" />
+        <activity android:name=".Activities.AddProjectActivity"></activity>
     </application>
 
 </manifest>
