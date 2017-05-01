@@ -1,11 +1,15 @@
 package com.project.comlab.comlabapp.Adapters;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 
@@ -18,9 +22,11 @@ import java.util.List;
 public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapter.ViewHolder> {
 
     List<NewsModel> newsList;
+    Activity activity;
 
-    public RecyclerNewsAdapter(List<NewsModel> newsList){
+    public RecyclerNewsAdapter(Activity activity, List<NewsModel> newsList){
         this.newsList = newsList;
+        this.activity = activity;
     }
 
     @Override
@@ -33,9 +39,20 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(newsList.get(position).getTitle());
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
+
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, NewDetailActivity.class);
+                intent.putExtra("title", newsList.get(position).getTitle());
+                intent.putExtra("description", newsList.get(position).getDescription());
+                intent.putExtra("owner", newsList.get(position).getOwner());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -45,14 +62,16 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name;
+        TextView title;
         TextView description;
+        CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.item_news_title);
+            title = (TextView) itemView.findViewById(R.id.item_news_title);
             description = (TextView) itemView.findViewById(R.id.item_news_description);
+            cardview = (CardView) itemView.findViewById(R.id.item_news_card);
         }
     }
 }

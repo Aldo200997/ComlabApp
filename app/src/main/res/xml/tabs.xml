@@ -6,7 +6,7 @@
         id="@+id/contributes"
         title="Aportes"
         icon="@drawable/news"
-        barColorWhenSelected="@color/colorPrimary"/>
+        barColorWhenSelected="@color/colorPrimary" />
 
     <tab
         id="@+id/events"
