@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,10 +29,11 @@ public class AddNewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new);
 
-
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
+
+        showToolbar("Agregar Aporte", true);
 
         et_title = (TextInputEditText) findViewById(R.id.add_new_title);
         et_description = (TextInputEditText) findViewById(R.id.add_new_description);
@@ -66,5 +68,13 @@ public class AddNewActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void showToolbar(String title, boolean backButton){
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
     }
 }

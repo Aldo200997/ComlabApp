@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,16 +41,21 @@ public class NewsFragment extends Fragment {
 
     RecyclerView rv_news;
     RecyclerNewsAdapter adapter;
+
     private FirebaseDatabase database;
     private DatabaseReference reference;
     List<NewsModel> newsList;
+
     FloatingActionButton fab;
+
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
+
+        showToolbar(view, "Aportes", false);
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +65,8 @@ public class NewsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
 
 
         // RecyclerView
@@ -93,6 +102,14 @@ public class NewsFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void showToolbar(View v, String title, boolean backButton){
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
+
     }
 
 }

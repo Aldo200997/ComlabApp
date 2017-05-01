@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,7 +30,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     private DatabaseReference reference;
     TextInputEditText et_title, et_description, et_adress, et_date, et_time, et_tag;
     Button btn_date, btn_time;
-    Button btn_event;
+    Button btn_add;
     private int dia, mes, anio, hora, minutos;
 
     @Override
@@ -40,6 +41,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("events");
+
+        showToolbar("Agregar Evento", true);
 
         btn_date = (Button) findViewById(R.id.add_event_date_btn);
         btn_time = (Button) findViewById(R.id.add_event_time_btn);
@@ -53,8 +56,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         et_time = (TextInputEditText) findViewById(R.id.add_event_time);
         et_tag = (TextInputEditText) findViewById(R.id.add_event_tag);
 
-        btn_event = (Button) findViewById(R.id.add_event_btn);
-        btn_event.setOnClickListener(new View.OnClickListener() {
+        btn_add = (Button) findViewById(R.id.add_event_btn);
+        btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -116,5 +119,13 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             timePicker.show();
 
         }
+    }
+
+    private void showToolbar(String title, boolean backButton){
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
     }
 }
