@@ -41,6 +41,7 @@ public class AddNewActivity extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String title = et_title.getText().toString();
                 String description = et_description.getText().toString();
                 String tag = et_tag.getText().toString();

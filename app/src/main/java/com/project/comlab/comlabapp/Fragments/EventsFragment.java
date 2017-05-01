@@ -1,7 +1,9 @@
 package com.project.comlab.comlabapp.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.project.comlab.comlabapp.Activities.AddEventActivity;
 import com.project.comlab.comlabapp.R;
 
 /**
@@ -26,6 +29,7 @@ public class EventsFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+    FloatingActionButton fab;
 
 
     public EventsFragment() {
@@ -40,6 +44,16 @@ public class EventsFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         reference = database.getReference("users");
+
+
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddEventActivity.class);
+                startActivity(intent);
+            }
+        });
 
         tv = (TextView) view.findViewById(R.id.preferencia);
 
