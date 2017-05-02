@@ -99,7 +99,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void updateProfile(){
         FirebaseUser user = mAuth.getCurrentUser();
             if(user != null){
-                reference.child(user.getUid()).child("preferencias").setValue("IoT");
+                // reference.child(user.getUid()).child("preferencias").setValue("IoT");
                 UserProfileChangeRequest update = new UserProfileChangeRequest.Builder().setDisplayName(et_username.getText().toString()).build();
                 user.updateProfile(update).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

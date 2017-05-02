@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +20,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Activities.AddEventActivity;
+import com.project.comlab.comlabapp.Adapters.RecyclerEventsAdapter;
+import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EventsFragment extends Fragment {
 
-    TextView tv;
+    // TextView tv;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+
     FloatingActionButton fab;
+
+    RecyclerView rv_events;
+    RecyclerEventsAdapter adapter;
+    List<EventsModel> eventList;
 
 
     public EventsFragment() {
@@ -43,7 +55,11 @@ public class EventsFragment extends Fragment {
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        reference = database.getReference("users");
+        reference = database.getReference("events");
+
+        rv_events = (RecyclerView) view.findViewById(R.id.rv_events);
+        rv_events.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        eventList = new ArrayList<>();
 
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -55,18 +71,21 @@ public class EventsFragment extends Fragment {
             }
         });
 
-        tv = (TextView) view.findViewById(R.id.preferencia);
+        // tv = (TextView) view.findViewById(R.id.preferencia);
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        adapter = new RecyclerEventsAdapter(eventList);
+        rv_events.setAdapter(adapter);
 
-        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                eventList.removeAll(eventList);
                 for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    String value = snap.getValue().toString();
-                    tv.setText(value);
+                    EventsModel event = snap.getValue(EventsModel.class);
+                    eventList.add(event);
                 }
 
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -74,7 +93,6 @@ public class EventsFragment extends Fragment {
 
             }
         });
-
 
         return view;
     }
