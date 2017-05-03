@@ -1,5 +1,8 @@
 package com.project.comlab.comlabapp.Adapters;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.codesgood.views.JustifiedTextView;
+import com.project.comlab.comlabapp.Activities.EventDetailActivity;
 import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
 
@@ -20,9 +24,11 @@ import java.util.List;
 public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAdapter.ViewHolder> {
 
     List<EventsModel> eventsList;
+    Activity activity;
 
-    public RecyclerEventsAdapter(List<EventsModel> eventsList){
+    public RecyclerEventsAdapter(Activity activity, List<EventsModel> eventsList){
         this.eventsList = eventsList;
+        this.activity = activity;
     }
 
     @Override
@@ -35,13 +41,25 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(eventsList.get(position).getTitle());
         holder.place.setText(eventsList.get(position).getAdress());
         holder.description.setText(eventsList.get(position).getDescription());
         holder.date.setText(eventsList.get(position).getDate());
         holder.time.setText(eventsList.get(position).getTime());
         holder.rating.setNumStars(5);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, EventDetailActivity.class);
+                intent.putExtra("title", eventsList.get(position).getTitle());
+                intent.putExtra("place", eventsList.get(position).getAdress());
+                intent.putExtra("description", eventsList.get(position).getDescription());
+                intent.putExtra("date", eventsList.get(position).getDate());
+                intent.putExtra("time", eventsList.get(position).getTime());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -57,6 +75,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
         TextView date;
         TextView time;
         RatingBar rating;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +85,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
             date = (TextView) itemView.findViewById(R.id.item_events_date);
             time = (TextView) itemView.findViewById(R.id.item_events_time);
             rating = (RatingBar) itemView.findViewById(R.id.item_events_rb);
+            cardView = (CardView) itemView.findViewById(R.id.item_events_card);
 
         }
     }

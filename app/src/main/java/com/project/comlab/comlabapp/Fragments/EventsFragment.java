@@ -73,7 +73,7 @@ public class EventsFragment extends Fragment {
 
         // tv = (TextView) view.findViewById(R.id.preferencia);
 
-        adapter = new RecyclerEventsAdapter(eventList);
+        adapter = new RecyclerEventsAdapter(getActivity(), eventList);
         rv_events.setAdapter(adapter);
 
         reference.addValueEventListener(new ValueEventListener() {

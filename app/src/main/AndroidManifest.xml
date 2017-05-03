@@ -44,7 +44,8 @@
                 android:value=".Activities.ContainerActivity" />
         </activity>
         <activity android:name=".Activities.AddProjectActivity" />
-        <activity android:name=".Activities.NewDetailActivity"></activity>
+        <activity android:name=".Activities.NewDetailActivity" />
+        <activity android:name=".Activities.EventDetailActivity"></activity>
     </application>
 
 </manifest>

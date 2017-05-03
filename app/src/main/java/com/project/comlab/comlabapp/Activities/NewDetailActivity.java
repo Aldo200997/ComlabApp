@@ -23,7 +23,7 @@ public class NewDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_detail);
 
         tv_title = (TextView) findViewById(R.id.new_title_detail);
-        tv_owner = (TextView) findViewById(R.id.new_owner_deatil);
+        tv_owner = (TextView) findViewById(R.id.new_owner_detail);
         tv_description = (JustifiedTextView) findViewById(R.id.new_description_detail);
 
 
