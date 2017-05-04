@@ -1,17 +1,20 @@
 package com.project.comlab.comlabapp.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,10 +26,12 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
 
     List<NewsModel> newsList;
     Activity activity;
+    Context context;
 
-    public RecyclerNewsAdapter(Activity activity, List<NewsModel> newsList){
+    public RecyclerNewsAdapter(Activity activity, Context context, List<NewsModel> newsList){
         this.newsList = newsList;
         this.activity = activity;
+        this.context = context;
     }
 
     @Override
@@ -42,6 +47,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
+        Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +70,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
 
         TextView title;
         TextView description;
+        ImageView image;
         CardView cardview;
 
         public ViewHolder(View itemView) {
@@ -72,6 +79,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             title = (TextView) itemView.findViewById(R.id.item_news_title);
             description = (TextView) itemView.findViewById(R.id.item_news_description);
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
+            image = (ImageView) itemView.findViewById(R.id.item_news_image);
         }
     }
 }

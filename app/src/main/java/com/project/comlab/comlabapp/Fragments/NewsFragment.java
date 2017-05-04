@@ -79,7 +79,7 @@ public class NewsFragment extends Fragment {
         reference = database.getReference("news");
 
         // Adapter RV
-        adapter = new RecyclerNewsAdapter(getActivity(), newsList);
+        adapter = new RecyclerNewsAdapter(getActivity(), getContext(), newsList);
         rv_news.setAdapter(adapter);
 
 

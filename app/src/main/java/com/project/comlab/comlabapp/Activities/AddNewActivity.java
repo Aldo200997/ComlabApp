@@ -116,6 +116,8 @@ public class AddNewActivity extends AppCompatActivity {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         if(gallery.resolveActivity(getPackageManager()) != null){
             startActivityForResult(gallery, 1);
+        }else{
+            return;
         }
     }
 
@@ -127,7 +129,6 @@ public class AddNewActivity extends AppCompatActivity {
             File file = new File(getRealPathFromURI(imageUri));
             pathAbsolute = file.getAbsolutePath();
             Toast.makeText(getApplicationContext(), "Foto seleccionada", Toast.LENGTH_SHORT).show();
-
         }
     }
 
