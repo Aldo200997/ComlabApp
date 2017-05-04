@@ -24,9 +24,10 @@ public class NewsModel {
         this.tag = tag;
     }
 
-    public NewsModel(String title, String description, String owner, String tag){
+    public NewsModel(String title, String description, String image, String owner, String tag){
         this.title = title;
         this.description = description;
+        this.image = image;
         this.owner = owner;
         this.tag = tag;
     }
