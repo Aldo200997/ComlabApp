@@ -32,6 +32,13 @@ public class NewsModel {
         this.tag = tag;
     }
 
+    public NewsModel(String title, String description, String owner, String tag){
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+        this.tag = tag;
+    }
+
     public String getTitle() {
         return title;
     }

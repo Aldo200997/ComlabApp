@@ -49,6 +49,8 @@ public class AddNewActivity extends AppCompatActivity {
     String tag;
     String owner;
 
+    Intent gallery = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class AddNewActivity extends AppCompatActivity {
                 owner = "";
 
                 if(title.equals("") || description.equals("") || tag.equals("")){
-                    Snackbar.make(v,"Campo vacío", Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Campo vacio", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -96,7 +98,7 @@ public class AddNewActivity extends AppCompatActivity {
                     owner = user.getDisplayName();
                 }
 
-                uploadFile();
+               uploadFile();
 
             }
         });
@@ -113,11 +115,9 @@ public class AddNewActivity extends AppCompatActivity {
     }
 
     private void takePicture(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         if(gallery.resolveActivity(getPackageManager()) != null){
             startActivityForResult(gallery, 1);
-        }else{
-            return;
         }
     }
 
@@ -129,6 +129,7 @@ public class AddNewActivity extends AppCompatActivity {
             File file = new File(getRealPathFromURI(imageUri));
             pathAbsolute = file.getAbsolutePath();
             Toast.makeText(getApplicationContext(), "Foto seleccionada", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -147,29 +148,34 @@ public class AddNewActivity extends AppCompatActivity {
     }
 
     private void uploadFile(){
-        File file = new File(pathAbsolute);
-        Uri uri = Uri.fromFile(file);
 
-        StorageReference imageReference = storageReference.child("image_" + uri.getLastPathSegment());
-        UploadTask task = imageReference.putFile(uri);
+        if(gallery != null){
+            File imageFile = new File(pathAbsolute);
+            Uri uri = Uri.fromFile(imageFile);
+            StorageReference imageReference = storageReference.child("image_" + uri.getLastPathSegment());
+            UploadTask task = imageReference.putFile(uri);
 
-        task.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "No se pudo subir la imagen", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
-                String imageURL = taskSnapshot.getDownloadUrl().toString();
-
-                NewsModel noticia = new NewsModel(title, description, imageURL, owner, tag);
-                reference.push().setValue(noticia);
-                Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
-                startActivity(intent);
-
-            }
-        });
+            task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "No se pudo subir la imagen", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
+                    String imageURL = taskSnapshot.getDownloadUrl().toString();
+                    NewsModel noticia = new NewsModel(title, description, imageURL, owner, tag);
+                    reference.push().setValue(noticia);
+                    Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }else{
+            NewsModel noticia = new NewsModel(title, description, owner, tag);
+            reference.push().setValue(noticia);
+            Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
+            startActivity(intent);
+        }
     }
 }
