@@ -3,6 +3,7 @@ package com.project.comlab.comlabapp.Activities;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.Random;
 
 public class AddNewActivity extends AppCompatActivity {
 
@@ -151,6 +153,16 @@ public class AddNewActivity extends AppCompatActivity {
 
         if(gallery != null){
             File imageFile = new File(pathAbsolute);
+
+            long fileInBytes = imageFile.length();
+            long fileInKb = fileInBytes / 1024;
+
+
+            if(fileInKb > 2000){
+                Toast.makeText(getApplicationContext(), "Tu imagen es muy pesada", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Uri uri = Uri.fromFile(imageFile);
             StorageReference imageReference = storageReference.child("image_" + uri.getLastPathSegment());
             UploadTask task = imageReference.putFile(uri);

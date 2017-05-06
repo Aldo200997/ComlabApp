@@ -13,6 +13,8 @@ public class NewsModel {
     private String source;
     private String tag;
 
+
+
     public NewsModel(){}
 
     public NewsModel(String title, String description, String image, String owner, String source, String tag){
@@ -22,6 +24,7 @@ public class NewsModel {
         this.owner = owner;
         this.source = source;
         this.tag = tag;
+
     }
 
     public NewsModel(String title, String description, String image, String owner, String tag){
@@ -30,6 +33,7 @@ public class NewsModel {
         this.image = image;
         this.owner = owner;
         this.tag = tag;
+
     }
 
     public NewsModel(String title, String description, String owner, String tag){
@@ -37,6 +41,7 @@ public class NewsModel {
         this.description = description;
         this.owner = owner;
         this.tag = tag;
+
     }
 
     public String getTitle() {
@@ -86,4 +91,6 @@ public class NewsModel {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
+
 }

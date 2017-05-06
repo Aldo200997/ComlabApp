@@ -17,6 +17,7 @@ import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by aldodev20 on 24/04/17.
@@ -27,6 +28,14 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     List<NewsModel> newsList;
     Activity activity;
     Context context;
+
+    int[] colors = {R.color.pink, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
+            R.color.green, R.color.yellow, R.color.orange, R.color.brown};
+
+    Random random = new Random();
+    int randomNum = (int)(Math.floor(Math.random() * 8));
+
+
 
     public RecyclerNewsAdapter(Activity activity, Context context, List<NewsModel> newsList){
         this.newsList = newsList;
@@ -48,7 +57,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
         Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
-
+        holder.image.setBackgroundColor(context.getResources().getColor(colors[(position * randomNum) % 9]));
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
