@@ -16,8 +16,10 @@ import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
 
 /**
  * Created by aldodev20 on 24/04/17.
@@ -29,11 +31,12 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     Activity activity;
     Context context;
 
-    int[] colors = {R.color.pink, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
+    int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
 
-    Random random = new Random();
-    int randomNum = (int)(Math.floor(Math.random() * 8));
+    // Numero random del 0 a 9
+    int randomNum = (int)(Math.floor(Math.random() * 10 ));
+
 
 
 
@@ -56,8 +59,8 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
-        Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
-        holder.image.setBackgroundColor(context.getResources().getColor(colors[(position * randomNum) % 9]));
+        //Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
+        holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

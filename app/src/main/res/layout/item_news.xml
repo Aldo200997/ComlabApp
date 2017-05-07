@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="200dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true">
@@ -17,17 +17,45 @@
         android:orientation="vertical"
         android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/item_news_image"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.45"/>
+            android:layout_weight="0.70">
+
+            <ImageView
+                android:id="@+id/item_news_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="20dp"
+                android:layout_gravity="bottom|end"
+                android:gravity="right"
+                android:layout_marginBottom="5dp">
+
+                <CheckBox
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:button="@drawable/selector_like_new"/>
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/share" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.55"
+            android:layout_weight="0.30"
             android:background="#29292929">
 
 
@@ -48,31 +76,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA"
+                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUE"
                 android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:maxLength="120"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="8dp"
-                android:paddingLeft="10dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/like"/>
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/share"
-                    android:layout_marginLeft="8dp"/>
-
-            </LinearLayout>
+                android:maxLength="200"/>
 
         </LinearLayout>
 
