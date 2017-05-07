@@ -20,7 +20,7 @@
             android:id="@+id/item_events_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="2.5"
             android:background="@color/colorPrimary"
             android:layout_marginBottom="10dp"/>
 
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1">
+            android:layout_weight="0.5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,11 +38,11 @@
                 android:layout_gravity="center_vertical">
                 <TextView
                     android:id="@+id/item_events_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Titulo del evento"
                     android:textSize="20sp"
-                    android:maxLength="20"
+                    android:maxLength="30"
                     android:textColor="@color/black"/>
 
                 <ImageView
@@ -53,9 +53,10 @@
 
                 <TextView
                     android:id="@+id/item_events_km"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="4 km"/>
+                    android:text="4 km"
+                    android:maxLength="15"/>
             </LinearLayout>
 
             <RatingBar
@@ -67,8 +68,8 @@
                 android:id="@+id/item_events_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lugar"
-                android:maxLength="20"
+                android:text="Salon candiles, Polanco, CDMX"
+                android:maxLength="30"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"/>
@@ -77,9 +78,9 @@
                 android:id="@+id/item_events_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus faucibus. Vivamus eu dolor aliquet, tincidunt libero nec, viverra nulla. Nullam ut laoreet justo. "
+                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus faucibus. Vivamus eu dolor aliquet, tincidunt libero nec, viveria "
                 android:textSize="10sp"
-                android:maxLength="425"
+                android:maxLength="450"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="10dp"/>
 
@@ -93,8 +94,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/calendar"/>
 
                 <TextView
@@ -104,7 +105,7 @@
                     android:text="30 de septiembre del 2017"
                     android:maxLength="30"
                     android:textSize="12sp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="8dp"
                     android:paddingLeft="10dp"/>
 
             </LinearLayout>
@@ -112,12 +113,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/clock"/>
 
                 <TextView
@@ -127,7 +128,7 @@
                     android:text="15:00 hrs"
                     android:maxLength="15"
                     android:textSize="12sp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="8dp"
                     android:paddingLeft="10dp"/>
 
             </LinearLayout>
