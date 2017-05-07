@@ -1,12 +1,14 @@
 package com.project.comlab.comlabapp.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -25,10 +27,18 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
 
     List<EventsModel> eventsList;
     Activity activity;
+    Context context;
 
-    public RecyclerEventsAdapter(Activity activity, List<EventsModel> eventsList){
+    int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
+            R.color.green, R.color.yellow, R.color.orange, R.color.brown};
+
+    // Numero random del 0 a 9
+    int randomNum = (int)(Math.floor(Math.random() * 10 ));
+
+    public RecyclerEventsAdapter(Activity activity, Context context, List<EventsModel> eventsList){
         this.eventsList = eventsList;
         this.activity = activity;
+        this.context = context;
     }
 
     @Override
@@ -47,6 +57,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
         holder.description.setText(eventsList.get(position).getDescription());
         holder.date.setText(eventsList.get(position).getDate());
         holder.time.setText(eventsList.get(position).getTime());
+        holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
         holder.rating.setNumStars(5);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +85,10 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
         JustifiedTextView description;
         TextView date;
         TextView time;
+        ImageView image;
         RatingBar rating;
         CardView cardView;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +97,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
             description = (JustifiedTextView) itemView.findViewById(R.id.item_events_description);
             date = (TextView) itemView.findViewById(R.id.item_events_date);
             time = (TextView) itemView.findViewById(R.id.item_events_time);
+            image = (ImageView) itemView.findViewById(R.id.item_events_image);
             rating = (RatingBar) itemView.findViewById(R.id.item_events_rb);
             cardView = (CardView) itemView.findViewById(R.id.item_events_card);
 
