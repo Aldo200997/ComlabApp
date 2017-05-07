@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codesgood.views.JustifiedTextView;
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
@@ -81,7 +82,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
-        TextView description;
+        JustifiedTextView description;
         ImageView image;
         CardView cardview;
 
@@ -89,7 +90,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.item_news_title);
-            description = (TextView) itemView.findViewById(R.id.item_news_description);
+            description = (JustifiedTextView) itemView.findViewById(R.id.item_news_description);
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
             image = (ImageView) itemView.findViewById(R.id.item_news_image);
         }

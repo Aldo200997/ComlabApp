@@ -71,16 +71,16 @@
                 android:paddingTop="4dp"
                 android:maxLength="30"/>
 
-            <TextView
+            <com.codesgood.views.JustifiedTextView
                 android:id="@+id/item_news_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUE"
+                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUEBA DE TEXTO"
                 android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:maxLength="200"/>
+                android:maxLength="240"/>
 
         </LinearLayout>
 
