@@ -20,11 +20,12 @@
             app:contentScrim="@color/colorPrimary">
 
             <ImageView
+                android:id="@+id/event_image_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
                 android:scaleType="centerCrop"
-                android:background="@drawable/paisaje"/>
+                android:background="@color/colorPrimary"/>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>

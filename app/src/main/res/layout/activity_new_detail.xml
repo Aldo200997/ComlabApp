@@ -52,7 +52,8 @@
                 android:text="Titulo del aporte"
                 android:textSize="24sp"
                 android:textColor="@color/black"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/new_owner_detail"
