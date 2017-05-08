@@ -27,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
-                android:background="@drawable/paisaje"/>
+                android:background="@color/colorPrimary"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
