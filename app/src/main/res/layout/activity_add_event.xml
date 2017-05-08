@@ -44,6 +44,14 @@
                     android:hint="Agrega un descripción" />
             </android.support.design.widget.TextInputLayout>
 
+            <Button
+                android:id="@+id/add_event_button_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/camera"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
