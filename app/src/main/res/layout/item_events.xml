@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_events_card"
     android:layout_width="match_parent"
-    android:layout_height="430dp"
+    android:layout_height="470dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
     app:cardUseCompatPadding="true">
@@ -28,6 +28,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="0.5">
 
             <LinearLayout
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center_vertical">
+
                 <TextView
                     android:id="@+id/item_events_title"
                     android:layout_width="150dp"
@@ -42,7 +44,8 @@
                     android:text="Titulo del evento"
                     android:textSize="20sp"
                     android:maxLength="30"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:layout_width="22dp"
@@ -61,7 +64,8 @@
             <RatingBar
                 android:id="@+id/item_events_rb"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
             <TextView
                 android:id="@+id/item_events_place"
@@ -69,16 +73,17 @@
                 android:layout_height="wrap_content"
                 android:text="Salon candiles, Polanco, CDMX"
                 android:maxLength="30"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
+                android:textStyle="italic"
                 android:layout_gravity="center"/>
 
             <com.codesgood.views.JustifiedTextView
                 android:id="@+id/item_events_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus faucibus. Vivamus eu dolor aliquet, tincidunt libero nec, viveria "
-                android:textSize="10sp"
+                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus fascinante al cine"
+                android:textSize="12sp"
                 android:maxLength="450"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="10dp"/>
@@ -104,6 +109,7 @@
                     android:text="30 de septiembre del 2017"
                     android:maxLength="30"
                     android:textSize="12sp"
+                    android:textColor="@color/black"
                     android:paddingTop="8dp"
                     android:paddingLeft="10dp"/>
 
@@ -127,6 +133,7 @@
                     android:text="15:00 hrs"
                     android:maxLength="15"
                     android:textSize="12sp"
+                    android:textColor="@color/black"
                     android:paddingTop="8dp"
                     android:paddingLeft="10dp"/>
 

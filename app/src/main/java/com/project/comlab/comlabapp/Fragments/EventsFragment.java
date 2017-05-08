@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,8 @@ public class EventsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         reference = database.getReference("events");
 
+        showToolbar(view, "Eventos", false);
+
         rv_events = (RecyclerView) view.findViewById(R.id.rv_events);
         rv_events.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         eventList = new ArrayList<>();
@@ -95,6 +99,14 @@ public class EventsFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void showToolbar(View v, String title, boolean backButton){
+        Toolbar toolbar;
+        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
     }
 
 }
