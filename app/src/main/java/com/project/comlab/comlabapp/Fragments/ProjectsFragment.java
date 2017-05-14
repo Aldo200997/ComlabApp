@@ -1,7 +1,9 @@
 package com.project.comlab.comlabapp.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.project.comlab.comlabapp.Activities.AddProjectActivity;
 import com.project.comlab.comlabapp.Adapters.RecyclerProjectsAdapter;
 import com.project.comlab.comlabapp.POJO.ProjectsModel;
 import com.project.comlab.comlabapp.R;
@@ -31,6 +34,7 @@ public class ProjectsFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     List<ProjectsModel> projectList;
+    FloatingActionButton fab;
 
 
     public ProjectsFragment() {
@@ -45,11 +49,22 @@ public class ProjectsFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("projects");
 
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddProjectActivity.class);
+                startActivity(intent);
+            }
+        });
+
         rv_projects = (RecyclerView) view.findViewById(R.id.rv_projects);
         rv_projects.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         projectList = new ArrayList<>();
         adapter = new RecyclerProjectsAdapter(getContext(), projectList);
+
+        rv_projects.setAdapter(adapter);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

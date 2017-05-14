@@ -15,22 +15,21 @@ public class ProjectsModel {
 
     public ProjectsModel(){}
 
-    public ProjectsModel(String title, String description, String image, String owner, String documentation, String tag){
+    public ProjectsModel(String title, String description, String image, String owner, String tag){
         this.title = title;
         this.description = description;
         this.image = image;
         this.owner = owner;
-        this.documentation = documentation;
         this.tag = tag;
     }
 
-    public ProjectsModel(String title, String description, String owner, String documentation, String tag){
+    public ProjectsModel(String title, String description, String owner, String tag){
         this.title = title;
         this.description = description;
         this.owner = owner;
-        this.documentation = documentation;
         this.tag = tag;
     }
+
 
     public String getTitle() {
         return title;
