@@ -72,6 +72,14 @@
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam magna augue, facilisis condimentum ornare eu, convallis nec justo. Sed vitae sodales erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque massa nec sem pharetra, ut dapibus augue eleifend. In malesuada, lorem vestibulum volutpat ultrices, odio ligula laoreet est, id cursus velit urna sagittis nibh. Sed orci ligula, varius et dictum et, facilisis quis erat. Nam arcu lectus, porttitor eu porta at, fringilla ut tellus. Morbi ullamcorper ligula ut bibendum bibendum. Donec hendrerit purus nec leo dapibus mollis. Aliquam maximus eu mauris non luctus. Aenean laoreet, tortor vitae volutpat imperdiet, orci diam convallis purus, ultrices fermentum tellus ipsum vitae lorem. Nunc est lacus, faucibus in purus molestie, semper pellentesque felis. Quisque mattis scelerisque pharetra. Quisque ut facilisis justo. Fusce a urna velit. Donec eget quam dui. Nullam aliquet odio a ligula pharetra, ut sodales erat volutpat. Donec lacinia lectus tellus, eu pretium risus iaculis ac. Donec ac hendrerit tellus. Nunc ut lorem magna. Curabitur faucibus, nulla non sollicitudin eleifend, purus ex ultricies velit, a malesuada lectus enim vel metus. Etiam at ligula a quam gravida tempor at sed ante."
                 android:textSize="14sp"/>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/new_rv_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
         </LinearLayout>
 
 

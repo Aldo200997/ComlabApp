@@ -1,5 +1,7 @@
 package com.project.comlab.comlabapp.POJO;
 
+import java.util.List;
+
 /**
  * Created by aldodev20 on 24/04/17.
  */
@@ -12,6 +14,8 @@ public class NewsModel {
     private String owner;
     private String source;
     private String tag;
+
+    private List<CommentsModel> commentsList;
 
 
 
@@ -26,6 +30,17 @@ public class NewsModel {
         this.tag = tag;
 
     }
+
+    public NewsModel(String title, String description, String image, String owner, String source, String tag, List<CommentsModel> commentsList){
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.owner = owner;
+        this.source = source;
+        this.tag = tag;
+        this.commentsList = commentsList;
+    }
+
 
     public NewsModel(String title, String description, String image, String owner, String tag){
         this.title = title;
@@ -90,6 +105,14 @@ public class NewsModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public void setCommentsList(List<CommentsModel> commentsList){
+        this.commentsList = commentsList;
+    }
+
+    public List<CommentsModel> getCommentsList(){
+        return commentsList;
     }
 
 

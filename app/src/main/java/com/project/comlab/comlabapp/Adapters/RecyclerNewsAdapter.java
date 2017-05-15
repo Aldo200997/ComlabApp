@@ -3,6 +3,7 @@ package com.project.comlab.comlabapp.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 import java.util.Random;
@@ -70,6 +72,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
                 intent.putExtra("description", newsList.get(position).getDescription());
                 intent.putExtra("owner", newsList.get(position).getOwner());
                 intent.putExtra("image", newsList.get(position).getImage());
+                intent.putExtra("comments", (Serializable) newsList.get(position).getCommentsList());
                 activity.startActivity(intent);
             }
         });
