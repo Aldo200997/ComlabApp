@@ -62,7 +62,7 @@ public class ProjectsFragment extends Fragment {
         rv_projects.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         projectList = new ArrayList<>();
-        adapter = new RecyclerProjectsAdapter(getContext(), projectList);
+        adapter = new RecyclerProjectsAdapter(getActivity(), getContext(), projectList);
 
         rv_projects.setAdapter(adapter);
 

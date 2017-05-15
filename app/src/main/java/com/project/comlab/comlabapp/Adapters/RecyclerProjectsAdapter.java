@@ -1,6 +1,9 @@
 package com.project.comlab.comlabapp.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codesgood.views.JustifiedTextView;
+import com.project.comlab.comlabapp.Activities.ProjectDetailActivity;
 import com.project.comlab.comlabapp.POJO.ProjectsModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
@@ -25,6 +29,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
 
     List<ProjectsModel> projectList;
     Context context;
+    Activity activity;
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
@@ -32,9 +37,10 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
     // Numero random del 0 a 9
     int randomNum = (int)(Math.floor(Math.random() * 10 ));
 
-    public RecyclerProjectsAdapter(Context context, List<ProjectsModel> projectList){
+    public RecyclerProjectsAdapter(Activity activity, Context context, List<ProjectsModel> projectList){
         this.context = context;
         this.projectList = projectList;
+        this.activity = activity;
     }
 
     @Override
@@ -53,6 +59,14 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
         holder.owner.setText(projectList.get(position).getOwner());
         holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ProjectDetailActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -67,6 +81,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
         ImageView image;
         TextView title;
         TextView description;
+        CardView cardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +91,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
             image = (ImageView) itemView.findViewById(R.id.item_project_image);
             title = (TextView) itemView.findViewById(R.id.item_project_title);
             description = (TextView) itemView.findViewById(R.id.item_project_description);
+            cardView = (CardView) itemView.findViewById(R.id.item_project_card);
         }
     }
 }

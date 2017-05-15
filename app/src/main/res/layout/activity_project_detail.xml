@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.project.comlab.comlabapp.Activities.ProjectDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/new_image_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                android:background="@color/colorPrimary"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Titulo del proyecto"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/paisaje"
+                android:layout_gravity="center"
+                android:layout_marginBottom="3dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Autor del proyecto"
+                android:layout_marginBottom="3dp"/>
+
+            <View style="@style/Divider"/>
+
+            <com.codesgood.views.JustifiedTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam magna augue, facilisis condimentum ornare eu, convallis nec justo. Sed vitae sodales erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque massa nec sem pharetra, ut dapibus augue eleifend. In malesuada, lorem vestibulum volutpat ultrices, odio ligula laoreet est, id cursus velit urna sagittis nibh. Sed orci ligula, varius et dictum et, facilisis quis erat. Nam arcu lectus, porttitor eu porta at, fringilla ut tellus. Morbi ullamcorper ligula ut bibendum bibendum. Donec hendrerit purus nec leo dapibus mollis. Aliquam maximus eu mauris non luctus. Aenean laoreet, tortor vitae volutpat imperdiet, orci diam convallis purus, ultrices fermentum tellus ipsum vitae lorem. Nunc est lacus, faucibus in purus molestie, semper pellentesque felis. Quisque mattis scelerisque pharetra. Quisque ut facilisis justo. Fusce a urna velit. Donec eget quam dui. Nullam aliquet odio a ligula pharetra, ut sodales erat volutpat. Donec lacinia lectus tellus, eu pretium risus iaculis ac. Donec ac hendrerit tellus. Nunc ut lorem magna. Curabitur faucibus, nulla non sollicitudin eleifend, purus ex ultricies velit, a malesuada lectus enim vel metus. Etiam at ligula a quam gravida tempor at sed ante."
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/profile"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="Link de contacto"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/like" />
+
+
+</android.support.design.widget.CoordinatorLayout>
