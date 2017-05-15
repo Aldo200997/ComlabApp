@@ -83,7 +83,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
 
         TextView title;
         TextView place;
-        JustifiedTextView description;
+        TextView description;
         TextView date;
         TextView time;
         ImageView image;
@@ -95,7 +95,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.item_events_title);
             place = (TextView) itemView.findViewById(R.id.item_events_place);
-            description = (JustifiedTextView) itemView.findViewById(R.id.item_events_description);
+            description = (TextView) itemView.findViewById(R.id.item_events_description);
             date = (TextView) itemView.findViewById(R.id.item_events_date);
             time = (TextView) itemView.findViewById(R.id.item_events_time);
             image = (ImageView) itemView.findViewById(R.id.item_events_image);

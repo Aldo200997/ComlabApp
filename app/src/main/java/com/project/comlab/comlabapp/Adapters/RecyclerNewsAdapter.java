@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.codesgood.views.JustifiedTextView;
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
@@ -23,6 +26,8 @@ import java.sql.Time;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
+
+
 
 /**
  * Created by aldodev20 on 24/04/17.
@@ -86,7 +91,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
-        JustifiedTextView description;
+        TextView description;
         ImageView image;
         CardView cardview;
 
@@ -94,7 +99,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.item_news_title);
-            description = (JustifiedTextView) itemView.findViewById(R.id.item_news_description);
+            description = (TextView) itemView.findViewById(R.id.item_news_description);
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
             image = (ImageView) itemView.findViewById(R.id.item_news_image);
         }

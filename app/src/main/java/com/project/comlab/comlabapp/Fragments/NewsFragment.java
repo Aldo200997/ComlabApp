@@ -2,6 +2,7 @@ package com.project.comlab.comlabapp.Fragments;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,6 +59,9 @@ public class NewsFragment extends Fragment {
 
         showToolbar(view, "Aportes", false);
 
+
+
+
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +87,6 @@ public class NewsFragment extends Fragment {
         adapter = new RecyclerNewsAdapter(getActivity(), getContext(), newsList);
         rv_news.setAdapter(adapter);
 
-
-        // Firebase Listener
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -103,7 +106,7 @@ public class NewsFragment extends Fragment {
 
         return view;
     }
-
+    
     private void showToolbar(View v, String title, boolean backButton){
         Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);

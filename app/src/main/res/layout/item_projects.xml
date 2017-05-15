@@ -47,7 +47,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp">
+                android:layout_height="60dp">
 
                 <ImageView
                     android:id="@+id/item_project_image"
@@ -62,7 +62,7 @@
                     android:paddingRight="20dp"
                     android:layout_gravity="bottom|end"
                     android:gravity="right"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="8dp">
 
                     <CheckBox
                         android:layout_width="45dp"
@@ -90,10 +90,12 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="5dp"/>
 
-            <com.codesgood.views.JustifiedTextView
+            <TextView
                 android:id="@+id/item_project_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus fascinante al cine aver hasta donde puede llegar este texto"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"

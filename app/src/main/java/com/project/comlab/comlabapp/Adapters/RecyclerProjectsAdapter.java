@@ -66,7 +66,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
         TextView owner;
         ImageView image;
         TextView title;
-        JustifiedTextView description;
+        TextView description;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -75,7 +75,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
             owner = (TextView) itemView.findViewById(R.id.item_project_owner);
             image = (ImageView) itemView.findViewById(R.id.item_project_image);
             title = (TextView) itemView.findViewById(R.id.item_project_title);
-            description = (JustifiedTextView) itemView.findViewById(R.id.item_project_description);
+            description = (TextView) itemView.findViewById(R.id.item_project_description);
         }
     }
 }
