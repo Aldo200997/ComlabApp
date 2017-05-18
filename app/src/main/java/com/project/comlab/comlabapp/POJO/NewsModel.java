@@ -12,6 +12,7 @@ public class NewsModel {
     private String description;
     private String image;
     private String owner;
+    private String emailOwner;
     private String source;
     private String tag;
 
@@ -21,40 +22,23 @@ public class NewsModel {
 
     public NewsModel(){}
 
-    public NewsModel(String title, String description, String image, String owner, String source, String tag){
+
+
+    public NewsModel(String title, String description, String image, String owner, String emailOwner, String tag){
         this.title = title;
         this.description = description;
         this.image = image;
         this.owner = owner;
-        this.source = source;
+        this.emailOwner = emailOwner;
         this.tag = tag;
 
     }
 
-    public NewsModel(String title, String description, String image, String owner, String source, String tag, List<CommentsModel> commentsList){
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.owner = owner;
-        this.source = source;
-        this.tag = tag;
-        this.commentsList = commentsList;
-    }
-
-
-    public NewsModel(String title, String description, String image, String owner, String tag){
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.owner = owner;
-        this.tag = tag;
-
-    }
-
-    public NewsModel(String title, String description, String owner, String tag){
+    public NewsModel(String title, String description, String owner, String emailOwner, String tag){
         this.title = title;
         this.description = description;
         this.owner = owner;
+        this.emailOwner = emailOwner;
         this.tag = tag;
 
     }
@@ -105,6 +89,14 @@ public class NewsModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getEmailOwner() {
+        return emailOwner;
+    }
+
+    public void setEmailOwner(String emailOwner) {
+        this.emailOwner = emailOwner;
     }
 
     public void setCommentsList(List<CommentsModel> commentsList){

@@ -47,7 +47,7 @@ public class MyNewsActivity extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        reference.orderByChild("owner").equalTo(user.getDisplayName()).addValueEventListener(new ValueEventListener() {
+        reference.orderByChild("emailOwner").equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myNewsList.removeAll(myNewsList);

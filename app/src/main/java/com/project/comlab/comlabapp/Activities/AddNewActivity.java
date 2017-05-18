@@ -50,6 +50,7 @@ public class AddNewActivity extends AppCompatActivity {
     String description;
     String tag;
     String owner;
+    String emailOwner;
 
     Intent gallery = null;
 
@@ -98,6 +99,7 @@ public class AddNewActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user != null){
                     owner = user.getDisplayName();
+                    emailOwner = user.getEmail();
                 }
 
                uploadFile();
@@ -177,14 +179,14 @@ public class AddNewActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
                     String imageURL = taskSnapshot.getDownloadUrl().toString();
-                    NewsModel noticia = new NewsModel(title, description, imageURL, owner, tag);
+                    NewsModel noticia = new NewsModel(title, description, imageURL, owner, emailOwner, tag);
                     reference.push().setValue(noticia);
                     Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
                     startActivity(intent);
                 }
             });
         }else{
-            NewsModel noticia = new NewsModel(title, description, owner, tag);
+            NewsModel noticia = new NewsModel(title, description, owner, emailOwner, tag);
             reference.push().setValue(noticia);
             Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
             startActivity(intent);

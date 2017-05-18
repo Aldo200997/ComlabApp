@@ -51,7 +51,8 @@
         <activity android:name=".Activities.EventDetailActivity" />
         <activity android:name=".Activities.ProjectDetailActivity" />
         <activity android:name=".ProfileConfig.MyPostsActivity" />
-        <activity android:name=".ProfileConfig.MyNewsActivity"></activity>
+        <activity android:name=".ProfileConfig.MyNewsActivity" />
+        <activity android:name=".ProfileConfig.EditProfileActivity"></activity>
     </application>
 
 </manifest>
