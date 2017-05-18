@@ -53,7 +53,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.title.setText(projectList.get(position).getTitle());
         holder.description.setText(projectList.get(position).getDescription());
         holder.owner.setText(projectList.get(position).getOwner());
@@ -63,6 +63,9 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ProjectDetailActivity.class);
+                intent.putExtra("title", projectList.get(position).getTitle());
+                intent.putExtra("description", projectList.get(position).getDescription());
+                intent.putExtra("owner", projectList.get(position).getOwner());
                 activity.startActivity(intent);
             }
         });

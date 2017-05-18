@@ -49,7 +49,9 @@
         <activity android:name=".Activities.AddProjectActivity" />
         <activity android:name=".Activities.NewDetailActivity" />
         <activity android:name=".Activities.EventDetailActivity" />
-        <activity android:name=".Activities.ProjectDetailActivity"></activity>
+        <activity android:name=".Activities.ProjectDetailActivity" />
+        <activity android:name=".ProfileConfig.MyPostsActivity" />
+        <activity android:name=".ProfileConfig.MyNewsActivity"></activity>
     </application>
 
 </manifest>
