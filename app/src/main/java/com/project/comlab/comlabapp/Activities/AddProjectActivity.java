@@ -125,7 +125,7 @@ public class AddProjectActivity extends AppCompatActivity {
     }
 
     private void uploadPicture(){
-        if(gallery != null){
+        if(path != null){
             File file = new File(path);
 
             long fileInBytes = file.length();

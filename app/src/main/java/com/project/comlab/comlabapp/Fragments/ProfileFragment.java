@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.project.comlab.comlabapp.ProfileConfig.EditProfileActivity;
+import com.project.comlab.comlabapp.ProfileConfig.MyEventsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyNewsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyPostsActivity;
 import com.project.comlab.comlabapp.R;
@@ -34,7 +35,7 @@ public class ProfileFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,6 +69,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), MyNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        tv_me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getActivity(), MyEventsActivity.class);
                 startActivity(intent);
             }
         });

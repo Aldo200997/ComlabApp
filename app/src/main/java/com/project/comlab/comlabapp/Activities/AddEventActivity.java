@@ -52,6 +52,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     String time;
     String tag;
     String owner;
+    String emailOwner;
 
     Button btn_date, btn_time;
     Button btn_add;
@@ -112,6 +113,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user != null){
                     owner = user.getDisplayName();
+                    emailOwner = user.getEmail();
                 }
 
                 if(title.equals("") || description.equals("") || adress.equals("") || date.equals("") || time.equals("") || tag.equals("")){
@@ -198,7 +200,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void uploadPicture(){
-        if(gallery != null){
+        if(path != null){
             File file = new File(path);
 
             long fileInBytes = file.length();
@@ -224,7 +226,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
                     String imageURL = taskSnapshot.getDownloadUrl().toString();
-                    EventsModel evento = new EventsModel(title, description, imageURL, owner, adress, date, time, tag);
+                    EventsModel evento = new EventsModel(title, description, imageURL, owner, emailOwner, adress, date, time, tag);
                     reference.push().setValue(evento);
                     Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                     startActivity(intent);
@@ -232,7 +234,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             });
 
         }else{
-            EventsModel evento = new EventsModel(title, description, adress, owner, date, time, tag);
+            EventsModel evento = new EventsModel(title, description, adress, owner, emailOwner, date, time, tag);
             reference.push().setValue(evento);
             Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
             startActivity(intent);

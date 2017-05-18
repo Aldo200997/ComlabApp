@@ -52,7 +52,7 @@ public class AddNewActivity extends AppCompatActivity {
     String owner;
     String emailOwner;
 
-    Intent gallery = null;
+    Intent gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +123,7 @@ public class AddNewActivity extends AppCompatActivity {
         if(gallery.resolveActivity(getPackageManager()) != null){
             startActivityForResult(gallery, 1);
         }
+
     }
 
     @Override
@@ -153,7 +154,7 @@ public class AddNewActivity extends AppCompatActivity {
 
     private void uploadFile(){
 
-        if(gallery != null){
+        if(pathAbsolute != null){
             File imageFile = new File(pathAbsolute);
 
             long fileInBytes = imageFile.length();

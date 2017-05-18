@@ -10,6 +10,7 @@ public class EventsModel {
     private String description;
     private String image;
     private String owner;
+    private String emailOwner;
     private String adress;
     private String date;
     private String time;
@@ -17,22 +18,24 @@ public class EventsModel {
 
     public EventsModel(){}
 
-    public EventsModel(String title, String description, String image, String owner, String adress, String date, String time, String tag){
+    public EventsModel(String title, String description, String image, String owner, String emailOwner, String adress, String date, String time, String tag){
         this.title = title;
         this.description = description;
         this.image = image;
         this.owner = owner;
+        this.emailOwner = emailOwner;
         this.adress = adress;
         this.date = date;
         this.time = time;
         this.tag = tag;
     }
 
-    public EventsModel(String title, String description, String adress, String owner, String date, String time, String tag){
+    public EventsModel(String title, String description, String adress, String owner, String emailOwner, String date, String time, String tag){
         this.title = title;
         this.description = description;
         this.adress = adress;
         this.owner = owner;
+        this.emailOwner = emailOwner;
         this.date = date;
         this.time = time;
         this.tag = tag;
@@ -93,6 +96,14 @@ public class EventsModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getEmailOwner() {
+        return emailOwner;
+    }
+
+    public void setEmailOwner(String emailOwner) {
+        this.emailOwner = emailOwner;
     }
 
     public String getOwner(){
