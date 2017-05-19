@@ -19,6 +19,8 @@ import com.project.comlab.comlabapp.R;
 
 import org.w3c.dom.Text;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,6 +28,7 @@ public class ProfileFragment extends Fragment {
 
     TextView tv_ep, tv_mpub, tv_ma, tv_me, tv_mpro, tv_ml, tv_username_b, tv_username_s;
     Intent intent;
+    CircleImageView image;
     private FirebaseAuth mAuth;
 
 
@@ -48,11 +51,13 @@ public class ProfileFragment extends Fragment {
         tv_me = (TextView) view.findViewById(R.id.me_profile);
         tv_mpro = (TextView) view.findViewById(R.id.mpro_profile);
         tv_ml = (TextView) view.findViewById(R.id.ml_profile);
+        image = (CircleImageView) view.findViewById(R.id.image_profile);
 
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
             tv_username_b.setText(user.getDisplayName());
             tv_username_s.setText(user.getDisplayName());
+            image.setImageURI(user.getPhotoUrl());
         }
 
 
