@@ -4,13 +4,20 @@ package com.project.comlab.comlabapp.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.project.comlab.comlabapp.Adapters.RecyclerProfileAdapter;
+import com.project.comlab.comlabapp.POJO.ItemsProfileModel;
 import com.project.comlab.comlabapp.ProfileConfig.EditProfileActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyEventsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyNewsActivity;
@@ -19,6 +26,9 @@ import com.project.comlab.comlabapp.R;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -26,8 +36,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ProfileFragment extends Fragment {
 
-    TextView tv_ep, tv_mpub, tv_ma, tv_me, tv_mpro, tv_ml, tv_username_b, tv_username_s;
+    TextView tv_username_b, tv_username_s;
     Intent intent;
+    RecyclerView rv;
+    RecyclerProfileAdapter adapter;
+    List<ItemsProfileModel> itemList;
     CircleImageView image;
     private FirebaseAuth mAuth;
 
@@ -43,14 +56,15 @@ public class ProfileFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+        rv = (RecyclerView) view.findViewById(R.id.rv_profile);
+        rv.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        initializeData();
+        adapter = new RecyclerProfileAdapter(getActivity(), getContext(), itemList);
+        rv.setAdapter(adapter);
+
         tv_username_b = (TextView) view.findViewById(R.id.username_profile_b);
         tv_username_s = (TextView) view.findViewById(R.id.username_profile_s);
-        tv_ep = (TextView) view.findViewById(R.id.ep_profile);
-        tv_mpub = (TextView) view.findViewById(R.id.mpub_profile);
-        tv_ma = (TextView) view.findViewById(R.id.ma_profile);
-        tv_me = (TextView) view.findViewById(R.id.me_profile);
-        tv_mpro = (TextView) view.findViewById(R.id.mpro_profile);
-        tv_ml = (TextView) view.findViewById(R.id.ml_profile);
         image = (CircleImageView) view.findViewById(R.id.image_profile);
 
         FirebaseUser user = mAuth.getCurrentUser();
@@ -61,32 +75,19 @@ public class ProfileFragment extends Fragment {
         }
 
 
-        tv_ep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), EditProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        tv_ma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), MyNewsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        tv_me.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(getActivity(), MyEventsActivity.class);
-                startActivity(intent);
-            }
-        });
-
         return view;
     }
+
+    private void initializeData(){
+        itemList = new ArrayList<>();
+        itemList.add(new ItemsProfileModel("Editar perfil", R.drawable.profileuno));
+        itemList.add(new ItemsProfileModel("Mis aportes", R.drawable.profiledos));
+        itemList.add(new ItemsProfileModel("Mis eventos", R.drawable.profilecinco));
+        itemList.add(new ItemsProfileModel("Mis proyectos", R.drawable.profilecuatro));
+        itemList.add(new ItemsProfileModel("Mis likes", R.drawable.profileuno));
+        itemList.add(new ItemsProfileModel("Mis amigos", R.drawable.profileuno));
+    }
+
+
 
 }

@@ -53,79 +53,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_profile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <TextView
-            android:id="@+id/ep_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar perfil"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-        <TextView
-            android:id="@+id/mpub_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis publicaciones"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-        <TextView
-            android:id="@+id/ma_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis aportes"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-        <TextView
-            android:id="@+id/me_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis eventos"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-        <TextView
-            android:id="@+id/mpro_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis proyectos"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-        <TextView
-            android:id="@+id/ml_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mis likes"
-            android:theme="@style/MenuProfile"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp" />
-
-        <View style="@style/Divider"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_profile"

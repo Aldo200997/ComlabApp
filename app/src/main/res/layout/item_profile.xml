@@ -1,65 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_profile"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:layout_height="200dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis aportes"
-        android:theme="@style/MenuProfile" />
+    <FrameLayout
+        android:id="@+id/item_profile_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <View style="@style/Divider"/>
+        <ImageView
+            android:id="@+id/item_profile_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis eventos"
-        android:theme="@style/MenuProfile" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:background="#292929">
 
-    <View style="@style/Divider"/>
+            <TextView
+                android:id="@+id/item_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Item"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis proyectos"
-        android:theme="@style/MenuProfile" />
+    </FrameLayout>
 
-    <View style="@style/Divider"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configuración de perfil"
-        android:theme="@style/MenuProfile" />
-
-    <View style="@style/Divider"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configuración de preferencias"
-        android:theme="@style/MenuProfile" />
-
-    <View style="@style/Divider"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis likes"
-        android:theme="@style/MenuProfile" />
-
-
-    <View style="@style/Divider"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis amigos"
-        android:theme="@style/MenuProfile" />
-    
-</LinearLayout>
+</android.support.v7.widget.CardView>

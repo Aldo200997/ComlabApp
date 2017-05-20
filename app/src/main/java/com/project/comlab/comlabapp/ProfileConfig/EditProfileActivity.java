@@ -117,6 +117,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1 && resultCode == RESULT_OK){
             image = data.getData();
+            Toast.makeText(getApplicationContext(), "Se seleccionó la nueva imágen", Toast.LENGTH_SHORT).show();
         }
     }
 }
