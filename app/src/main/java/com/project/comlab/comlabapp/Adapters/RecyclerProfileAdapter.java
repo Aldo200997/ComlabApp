@@ -16,6 +16,7 @@ import com.project.comlab.comlabapp.POJO.ItemsProfileModel;
 import com.project.comlab.comlabapp.ProfileConfig.EditProfileActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyEventsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyNewsActivity;
+import com.project.comlab.comlabapp.ProfileConfig.MyProjectsActivity;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -56,9 +57,9 @@ public class RecyclerProfileAdapter extends RecyclerView.Adapter<RecyclerProfile
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.name.setText(itemList.get(position).name);
+        holder.name.setText(itemList.get(position).getName());
         holder.frame.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
-        Picasso.with(context).load(itemList.get(position).image).into(holder.image);
+        Picasso.with(context).load(itemList.get(position).getImage()).into(holder.image);
 
     }
 
@@ -100,6 +101,12 @@ public class RecyclerProfileAdapter extends RecyclerView.Adapter<RecyclerProfile
                             intent = new Intent(activity, MyEventsActivity.class);
                             activity.startActivity(intent);
                             break;
+
+                        case 3:
+                            intent = new Intent(activity, MyProjectsActivity.class);
+                            activity.startActivity(intent);
+                            break;
+
 
 
                     }

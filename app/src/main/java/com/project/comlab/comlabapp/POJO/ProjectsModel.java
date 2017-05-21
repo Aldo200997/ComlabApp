@@ -12,6 +12,7 @@ public class ProjectsModel {
     private String owner;
     private String documentation;
     private String tag;
+    private String key;
 
     public ProjectsModel(){}
 
@@ -77,5 +78,13 @@ public class ProjectsModel {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

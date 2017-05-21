@@ -7,12 +7,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Adapters.RecyclerEventsAdapter;
+import com.project.comlab.comlabapp.Adapters.RecyclerEventsDeleteAdapter;
 import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
 
@@ -22,7 +24,7 @@ import java.util.List;
 public class MyEventsActivity extends AppCompatActivity {
 
     RecyclerView rv;
-    RecyclerEventsAdapter adapter;
+    RecyclerEventsDeleteAdapter adapter;
     List<EventsModel> myEventsList;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -43,20 +45,39 @@ public class MyEventsActivity extends AppCompatActivity {
 
         myEventsList = new ArrayList<>();
 
-        adapter = new RecyclerEventsAdapter(this, getApplicationContext(), myEventsList);
+        adapter = new RecyclerEventsDeleteAdapter(this, getApplicationContext(), myEventsList);
         rv.setAdapter(adapter);
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        reference.orderByChild("emailOwner").equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
+        reference.orderByChild("emailOwner").equalTo(user.getEmail()).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                myEventsList.removeAll(myEventsList);
-                for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    EventsModel event = snap.getValue(EventsModel.class);
-                    myEventsList.add(event);
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                EventsModel event = dataSnapshot.getValue(EventsModel.class);
+                event.setKey(dataSnapshot.getKey());
+                myEventsList.add(event);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                for (EventsModel em: myEventsList) {
+                    if(em.getKey().equals(key)){
+                        myEventsList.remove(em);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -64,7 +85,6 @@ public class MyEventsActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 

@@ -15,6 +15,7 @@ public class EventsModel {
     private String date;
     private String time;
     private String tag;
+    private String key;
 
     public EventsModel(){}
 
@@ -112,5 +113,13 @@ public class EventsModel {
 
     public void setOwner(String owner){
         this.owner = owner;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
