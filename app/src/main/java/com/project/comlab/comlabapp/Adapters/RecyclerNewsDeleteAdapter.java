@@ -51,7 +51,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_news, parent, false);
+                .inflate(R.layout.item_delete_news, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -75,7 +75,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
             }
         });
 
-        holder.cardview.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.delete.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 remove(newsList.get(position));
@@ -97,16 +97,17 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
 
         TextView title;
         TextView description;
-        ImageView image;
+        ImageView image, delete;
         CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.item_news_title);
-            description = (TextView) itemView.findViewById(R.id.item_news_description);
-            cardview = (CardView) itemView.findViewById(R.id.item_news_card);
-            image = (ImageView) itemView.findViewById(R.id.item_news_image);
+            title = (TextView) itemView.findViewById(R.id.item_delete_news_title);
+            description = (TextView) itemView.findViewById(R.id.item_delete_news_description);
+            cardview = (CardView) itemView.findViewById(R.id.item_delete_news_card);
+            image = (ImageView) itemView.findViewById(R.id.item_delete_news_image);
+            delete = (ImageView) itemView.findViewById(R.id.item_delete_news_delete);
         }
     }
 }

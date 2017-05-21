@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    android:id="@+id/item_delete_news_card"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.70">
+
+            <ImageView
+                android:id="@+id/item_delete_news_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blue"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="10dp"
+                android:layout_gravity="bottom|end"
+                android:gravity="right"
+                android:layout_marginBottom="5dp">
+
+
+                <CheckBox
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:button="@drawable/selector_like_new"
+                    android:layout_marginRight="8dp"
+                    />
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/share" />
+
+                <ImageView
+                    android:id="@+id/item_delete_news_delete"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/delete"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.30"
+            android:background="#29292929">
+
+
+            <TextView
+                android:id="@+id/item_delete_news_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del aporte"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:maxLength="30"/>
+
+            <TextView
+                android:id="@+id/item_delete_news_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUEBA DE TEXTO"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:maxLength="240"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
