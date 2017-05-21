@@ -53,7 +53,8 @@
         <activity android:name=".ProfileConfig.MyPostsActivity" />
         <activity android:name=".ProfileConfig.MyNewsActivity" />
         <activity android:name=".ProfileConfig.EditProfileActivity" />
-        <activity android:name=".ProfileConfig.MyEventsActivity"></activity>
+        <activity android:name=".ProfileConfig.MyEventsActivity" />
+        <activity android:name=".ProfileConfig.MyProjectsActivity"></activity>
     </application>
 
 </manifest>

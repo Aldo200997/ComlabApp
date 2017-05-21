@@ -15,6 +15,7 @@ public class NewsModel {
     private String emailOwner;
     private String source;
     private String tag;
+    private String key;
 
     private List<CommentsModel> commentsList;
 
@@ -101,6 +102,14 @@ public class NewsModel {
 
     public void setCommentsList(List<CommentsModel> commentsList){
         this.commentsList = commentsList;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public List<CommentsModel> getCommentsList(){
