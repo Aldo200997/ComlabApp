@@ -2,13 +2,21 @@ package com.project.comlab.comlabapp.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +38,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
     List<NewsModel> newsList;
     Activity activity;
     Context context;
+
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
@@ -82,10 +91,47 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
                 return true;
             }
         });
+
+        holder.image.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                update(newsList.get(position));
+                return true;
+            }
+        });
     }
 
     public void remove(NewsModel news){
         reference.child(news.getKey()).removeValue();
+    }
+
+
+
+    private void update(final NewsModel news){
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setTitle("Editar publicacion");
+        View view = activity.getLayoutInflater().inflate(R.layout.item_dialog, null);
+
+        final TextInputEditText et_title = (TextInputEditText) view.findViewById(R.id.item_dialog_title);
+        final TextInputEditText et_description = (TextInputEditText) view.findViewById(R.id.item_dialog_description);
+
+
+        alert.setCancelable(true);
+        alert.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                news.setTitle(et_title.getText().toString());
+                news.setDescription(et_description.getText().toString());
+                reference.child(news.getKey()).setValue(news);
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        dialog.setView(view);
+
+        dialog.show();
+
+
+
     }
 
     @Override

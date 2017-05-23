@@ -116,5 +116,10 @@ public class NewsModel {
         return commentsList;
     }
 
+    public void setValues(NewsModel news){
+        this.title = news.title;
+        this.description = news.description;
+    }
+
 
 }

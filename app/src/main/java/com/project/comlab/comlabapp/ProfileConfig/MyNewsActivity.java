@@ -62,7 +62,14 @@ public class MyNewsActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                String key = dataSnapshot.getKey();
+                NewsModel newsUpdate = dataSnapshot.getValue(NewsModel.class);
+                for (NewsModel nm: myNewsList) {
+                    if(nm.getKey().equals(key)){
+                        nm.setValues(newsUpdate);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override
