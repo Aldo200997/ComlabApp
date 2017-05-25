@@ -61,7 +61,14 @@ public class MyEventsActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                String key = dataSnapshot.getKey();
+                EventsModel event = dataSnapshot.getValue(EventsModel.class);
+                for (EventsModel em: myEventsList) {
+                    if(em.getKey().equals(key)){
+                        em.setValues(event);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override

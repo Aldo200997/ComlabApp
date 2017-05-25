@@ -122,4 +122,14 @@ public class EventsModel {
     public void setKey(String key) {
         this.key = key;
     }
+
+    public void setValues(EventsModel event){
+        this.title = event.title;
+        this.description = event.description;
+        this.adress = event.adress;
+        this.date = event.date;
+        this.time = event.time;
+    }
+
+
 }
