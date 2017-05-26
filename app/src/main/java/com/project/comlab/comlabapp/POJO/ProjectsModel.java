@@ -10,24 +10,27 @@ public class ProjectsModel {
     private String description;
     private String image;
     private String owner;
+    private String emailOwner;
     private String documentation;
     private String tag;
     private String key;
 
     public ProjectsModel(){}
 
-    public ProjectsModel(String title, String description, String image, String owner, String tag){
+    public ProjectsModel(String title, String description, String image, String owner, String emailOwner, String tag){
         this.title = title;
         this.description = description;
         this.image = image;
         this.owner = owner;
+        this.emailOwner = emailOwner;
         this.tag = tag;
     }
 
-    public ProjectsModel(String title, String description, String owner, String tag){
+    public ProjectsModel(String title, String description, String owner, String emailOwner, String tag){
         this.title = title;
         this.description = description;
         this.owner = owner;
+        this.emailOwner = emailOwner;
         this.tag = tag;
     }
 
@@ -64,6 +67,14 @@ public class ProjectsModel {
         this.owner = owner;
     }
 
+    public String getEmailOwner() {
+        return emailOwner;
+    }
+
+    public void setEmailOwner(String emailOwner) {
+        this.emailOwner = emailOwner;
+    }
+
     public String getDocumentation() {
         return documentation;
     }
@@ -86,5 +97,13 @@ public class ProjectsModel {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+
+
+    public void setValues(ProjectsModel project){
+        this.title = project.title;
+        this.description = project.description;
+        this.documentation = project.documentation;
     }
 }

@@ -42,7 +42,7 @@ public class AddProjectActivity extends AppCompatActivity {
     private StorageReference sReference;
     private FirebaseAuth mAuth;
 
-    String title, description, tag, owner;
+    String title, description, tag, owner, emailOwner;
 
 
 
@@ -81,6 +81,7 @@ public class AddProjectActivity extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user != null){
                     owner = user.getDisplayName();
+                    emailOwner = user.getEmail();
                 }
 
                 if(title.equals("") || description.equals("") || tag.equals("")){
@@ -151,7 +152,7 @@ public class AddProjectActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
                     String image = taskSnapshot.getDownloadUrl().toString();
-                    ProjectsModel proyecto = new ProjectsModel(title, description, image, owner, tag);
+                    ProjectsModel proyecto = new ProjectsModel(title, description, image, owner, emailOwner, tag);
                     dReference.push().setValue(proyecto);
                     Intent intent = new Intent(AddProjectActivity.this, ContainerActivity.class);
                     startActivity(intent);
@@ -159,7 +160,7 @@ public class AddProjectActivity extends AppCompatActivity {
             });
 
         }else{
-            ProjectsModel proyecto = new ProjectsModel(title, description, owner, tag);
+            ProjectsModel proyecto = new ProjectsModel(title, description, owner, emailOwner, tag);
             dReference.push().setValue(proyecto);
             Intent intent = new Intent(AddProjectActivity.this, ContainerActivity.class);
             startActivity(intent);
