@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Adapters.RecyclerNewsAdapter;
 import com.project.comlab.comlabapp.Adapters.RecyclerNewsDeleteAdapter;
+import com.project.comlab.comlabapp.CreateToolbar;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 
@@ -23,7 +26,7 @@ import java.util.List;
 
 import static com.project.comlab.comlabapp.R.drawable.news;
 
-public class MyNewsActivity extends AppCompatActivity {
+public class MyNewsActivity extends AppCompatActivity implements CreateToolbar {
 
     RecyclerView rv;
     RecyclerNewsDeleteAdapter adapter;
@@ -36,6 +39,8 @@ public class MyNewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_news);
+
+        showToolbar("Mis aportes", false);
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
@@ -95,6 +100,19 @@ public class MyNewsActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    public void showToolbar(String title, boolean backButton) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
+    }
+
+    @Override
+    public void showToolbarF(View v, String title, boolean backButton) {
 
     }
 }

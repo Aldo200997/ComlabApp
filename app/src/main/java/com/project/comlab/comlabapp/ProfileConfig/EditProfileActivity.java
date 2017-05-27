@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,9 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.project.comlab.comlabapp.Activities.ContainerActivity;
+import com.project.comlab.comlabapp.CreateToolbar;
 import com.project.comlab.comlabapp.R;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity implements CreateToolbar {
 
     TextInputEditText et_username;
     Button btn_update, btn_photo;
@@ -30,6 +33,8 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        showToolbar("Editar perfil", false);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -67,6 +72,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     updateImage();
                 }
 
+                startActivity(new Intent(EditProfileActivity.this, ContainerActivity.class));
+
 
             }
         });
@@ -100,6 +107,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getApplicationContext(), "Se actualizaron los datos correctamente", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
@@ -119,5 +127,19 @@ public class EditProfileActivity extends AppCompatActivity {
             image = data.getData();
             Toast.makeText(getApplicationContext(), "Se seleccionó la nueva imágen", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    @Override
+    public void showToolbar(String title, boolean backButton) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
+    }
+
+    @Override
+    public void showToolbarF(View v, String title, boolean backButton) {
+
     }
 }

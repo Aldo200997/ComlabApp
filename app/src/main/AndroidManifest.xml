@@ -46,7 +46,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.ContainerActivity" />
         </activity>
-        <activity android:name=".Activities.AddProjectActivity" />
+
+        <activity
+            android:name=".Activities.AddProjectActivity"
+            android:parentActivityName=".Activities.ContainerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.ContainerActivity"/>
+        </activity>
+
+
         <activity android:name=".Activities.NewDetailActivity" />
         <activity android:name=".Activities.EventDetailActivity" />
         <activity android:name=".Activities.ProjectDetailActivity" />

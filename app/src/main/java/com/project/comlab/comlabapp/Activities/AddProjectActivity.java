@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,12 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.project.comlab.comlabapp.CreateToolbar;
 import com.project.comlab.comlabapp.POJO.ProjectsModel;
 import com.project.comlab.comlabapp.R;
 
 import java.io.File;
 
-public class AddProjectActivity extends AppCompatActivity {
+public class AddProjectActivity extends AppCompatActivity implements CreateToolbar {
 
     TextInputEditText et_title, et_description, et_tag;
     Button btn_photo, btn_add;
@@ -51,6 +53,7 @@ public class AddProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_project);
 
+        showToolbar("Agregar proyecto", true);
 
         database = FirebaseDatabase.getInstance();
         dReference = database.getReference("projects");
@@ -165,5 +168,19 @@ public class AddProjectActivity extends AppCompatActivity {
             Intent intent = new Intent(AddProjectActivity.this, ContainerActivity.class);
             startActivity(intent);
         }
+    }
+
+
+    @Override
+    public void showToolbar(String title, boolean backButton) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(backButton);
+    }
+
+    @Override
+    public void showToolbarF(View v, String title, boolean backButton) {
+
     }
 }
