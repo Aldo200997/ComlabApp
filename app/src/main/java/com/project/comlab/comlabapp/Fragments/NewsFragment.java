@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -87,15 +88,42 @@ public class NewsFragment extends Fragment {
         adapter = new RecyclerNewsAdapter(getActivity(), getContext(), newsList);
         rv_news.setAdapter(adapter);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                newsList.removeAll(newsList);
-                for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    NewsModel news = snap.getValue(NewsModel.class);
-                    newsList.add(news);
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                NewsModel news = dataSnapshot.getValue(NewsModel.class);
+                news.setKey(key);
+                newsList.add(news);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                NewsModel news = dataSnapshot.getValue(NewsModel.class);
+                for (NewsModel nm: newsList) {
+                    if(nm.getKey().equals(key)){
+                        nm.setValues(news);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                for (NewsModel nm: newsList) {
+                    if(nm.getKey().equals(key)){
+                        newsList.remove(nm);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override

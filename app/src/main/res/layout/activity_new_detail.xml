@@ -71,19 +71,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam magna augue, facilisis condimentum ornare eu, convallis nec justo. Sed vitae sodales erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque massa nec sem pharetra, ut dapibus augue eleifend. In malesuada, lorem vestibulum volutpat ultrices, odio ligula laoreet est, id cursus velit urna sagittis nibh. Sed orci ligula, varius et dictum et, facilisis quis erat. Nam arcu lectus, porttitor eu porta at, fringilla ut tellus. Morbi ullamcorper ligula ut bibendum bibendum. Donec hendrerit purus nec leo dapibus mollis. Aliquam maximus eu mauris non luctus. Aenean laoreet, tortor vitae volutpat imperdiet, orci diam convallis purus, ultrices fermentum tellus ipsum vitae lorem. Nunc est lacus, faucibus in purus molestie, semper pellentesque felis. Quisque mattis scelerisque pharetra. Quisque ut facilisis justo. Fusce a urna velit. Donec eget quam dui. Nullam aliquet odio a ligula pharetra, ut sodales erat volutpat. Donec lacinia lectus tellus, eu pretium risus iaculis ac. Donec ac hendrerit tellus. Nunc ut lorem magna. Curabitur faucibus, nulla non sollicitudin eleifend, purus ex ultricies velit, a malesuada lectus enim vel metus. Etiam at ligula a quam gravida tempor at sed ante."
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:paddingBottom="5dp"/>
 
+            <View style="@style/Divider"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/new_rv_comments"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"/>
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextBlack">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/new_et_comment_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Escribir comentario..."/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/new_btn_comment_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comentar"
+                android:theme="@style/RaisedButton"/>
 
         </LinearLayout>
 
-
     </android.support.v4.widget.NestedScrollView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -93,6 +114,5 @@
         app:layout_anchorGravity="bottom|right|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/like" />
-
 
 </android.support.design.widget.CoordinatorLayout>

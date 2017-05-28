@@ -6,8 +6,11 @@ package com.project.comlab.comlabapp.POJO;
 
 public class CommentsModel {
 
+    private String key;
     private String text;
     private String owner;
+
+    public CommentsModel(){}
 
     public CommentsModel(String text, String owner){
         this.text = text;
@@ -32,5 +35,17 @@ public class CommentsModel {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public void setValues(CommentsModel comments){
+        this.text = comments.text;
     }
 }
