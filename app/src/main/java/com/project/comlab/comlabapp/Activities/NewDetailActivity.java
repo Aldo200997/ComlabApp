@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codesgood.views.JustifiedTextView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +42,7 @@ public class NewDetailActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private FirebaseAuth mAuth;
     String key = "";
 
 
@@ -50,6 +53,7 @@ public class NewDetailActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
+        mAuth = FirebaseAuth.getInstance();
 
         tv_title = (TextView) findViewById(R.id.new_title_detail);
         tv_owner = (TextView) findViewById(R.id.new_owner_detail);
@@ -94,7 +98,9 @@ public class NewDetailActivity extends AppCompatActivity {
                     return;
                 }
 
-                CommentsModel commentModel = new CommentsModel(comment);
+                FirebaseUser user = mAuth.getCurrentUser();
+                String emailOwner = user.getEmail();
+                CommentsModel commentModel = new CommentsModel(comment, emailOwner);
                 reference.child(key).child("comments").push().setValue(commentModel);
             }
         });

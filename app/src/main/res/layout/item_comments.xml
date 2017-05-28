@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Usuario dice:"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/black" />
 
         <TextView

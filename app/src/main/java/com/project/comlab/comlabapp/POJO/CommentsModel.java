@@ -8,13 +8,13 @@ public class CommentsModel {
 
     private String key;
     private String text;
-    private String owner;
+    private String emailOwner;
 
     public CommentsModel(){}
 
-    public CommentsModel(String text, String owner){
+    public CommentsModel(String text, String emailOwner){
         this.text = text;
-        this.owner = owner;
+        this.emailOwner = emailOwner;
     }
 
     public CommentsModel(String text){
@@ -29,12 +29,12 @@ public class CommentsModel {
         this.text = text;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getEmailOwner() {
+        return emailOwner;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setEmailOwner(String emailOwner) {
+        this.emailOwner = emailOwner;
     }
 
     public String getKey() {

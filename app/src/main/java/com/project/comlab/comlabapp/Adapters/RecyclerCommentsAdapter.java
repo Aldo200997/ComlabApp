@@ -35,6 +35,7 @@ public class RecyclerCommentsAdapter extends RecyclerView.Adapter<RecyclerCommen
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.email.setText(commentsList.get(position).getEmailOwner());
         holder.text.setText(commentsList.get(position).getText());
     }
 
@@ -45,12 +46,12 @@ public class RecyclerCommentsAdapter extends RecyclerView.Adapter<RecyclerCommen
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView username, text;
+        TextView email, text;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            username = (TextView) itemView.findViewById(R.id.item_comments_user);
+            email = (TextView) itemView.findViewById(R.id.item_comments_user);
             text = (TextView) itemView.findViewById(R.id.item_comments_text);
         }
     }
