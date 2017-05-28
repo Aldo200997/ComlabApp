@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.comlab.comlabapp.Activities.NewDetailActivity">
+    tools:context="com.project.comlab.comlabapp.Activities.NewDetailActivity"
+    android:background="@color/white">
 
 
     <android.support.design.widget.AppBarLayout
@@ -52,6 +53,7 @@
                 android:text="Titulo del aporte"
                 android:textSize="24sp"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:gravity="center"/>
 
@@ -76,6 +78,17 @@
 
             <View style="@style/Divider"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Comentarios:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:paddingTop="10dp" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/new_rv_comments"
                 android:layout_width="match_parent"
@@ -96,10 +109,12 @@
 
             <Button
                 android:id="@+id/new_btn_comment_detail"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="Comentar"
-                android:theme="@style/RaisedButton"/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:theme="@style/CommentButton"/>
 
         </LinearLayout>
 

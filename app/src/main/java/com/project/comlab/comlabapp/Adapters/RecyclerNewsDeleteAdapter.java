@@ -75,6 +75,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, NewDetailActivity.class);
+                intent.putExtra("key", newsList.get(position).getKey());
                 intent.putExtra("title", newsList.get(position).getTitle());
                 intent.putExtra("description", newsList.get(position).getDescription());
                 intent.putExtra("owner", newsList.get(position).getOwner());
