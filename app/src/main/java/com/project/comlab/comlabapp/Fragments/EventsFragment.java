@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -80,16 +81,41 @@ public class EventsFragment extends Fragment {
         adapter = new RecyclerEventsAdapter(getActivity(), getContext(), eventList);
         rv_events.setAdapter(adapter);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                eventList.removeAll(eventList);
-                for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    EventsModel event = snap.getValue(EventsModel.class);
-                    eventList.add(event);
-                }
-
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                EventsModel event = dataSnapshot.getValue(EventsModel.class);
+                event.setKey(dataSnapshot.getKey());
+                eventList.add(event);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                EventsModel event = dataSnapshot.getValue(EventsModel.class);
+                for (EventsModel em: eventList) {
+                    if(event.getKey().equals(key)){
+                        em.setValues(event);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                for (EventsModel em: eventList) {
+                    if(em.getKey().equals(key)){
+                        eventList.remove(em);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override

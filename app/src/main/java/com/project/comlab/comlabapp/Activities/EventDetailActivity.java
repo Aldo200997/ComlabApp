@@ -1,27 +1,62 @@
 package com.project.comlab.comlabapp.Activities;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codesgood.views.JustifiedTextView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.project.comlab.comlabapp.Adapters.RecyclerCommentsAdapter;
+import com.project.comlab.comlabapp.POJO.CommentsModel;
+import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventDetailActivity extends AppCompatActivity {
 
     TextView tv_title, tv_place, tv_date, tv_time;
     JustifiedTextView tv_description;
     ImageView iv_image;
-    RatingBar rb;
+    Button btn_comment;
+    TextInputEditText et_comment;
+
+    String key = "";
+    RecyclerView rv_comments;
+    RecyclerCommentsAdapter adapter;
+    List<CommentsModel> commentsList;
+
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private FirebaseAuth mAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("comments").child("events");
+        mAuth = FirebaseAuth.getInstance();
 
         tv_title = (TextView) findViewById(R.id.event_title_detail);
         tv_place = (TextView) findViewById(R.id.event_place_detail);
@@ -29,11 +64,24 @@ public class EventDetailActivity extends AppCompatActivity {
         tv_time = (TextView) findViewById(R.id.event_time_detail);
         tv_description = (JustifiedTextView) findViewById(R.id.event_description_detail);
         iv_image = (ImageView) findViewById(R.id.event_image_detail);
+        rv_comments = (RecyclerView) findViewById(R.id.event_rv_comments_detail);
+        et_comment = (TextInputEditText) findViewById(R.id.event_et_comment_detail);
+        btn_comment = (Button) findViewById(R.id.event_btn_comment_detail);
+
+
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
 
+
+        rv_comments.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        commentsList = new ArrayList<>();
+        adapter = new RecyclerCommentsAdapter(EventDetailActivity.this, getApplicationContext(),commentsList);
+        rv_comments.setAdapter(adapter);
+
+
         if(extras != null){
+            key = extras.getString("key");
             String title = extras.getString("title");
             String place = extras.getString("place");
             String date = extras.getString("date");
@@ -48,5 +96,46 @@ public class EventDetailActivity extends AppCompatActivity {
             tv_time.setText(time);
             Picasso.with(getApplicationContext()).load(image).into(iv_image);
         }
+
+         btn_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String text = et_comment.getText().toString();
+
+                if(text.equals("")){
+                    Toast.makeText(getApplicationContext(), "Campo de comentario vacío", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                String eOwner = user.getEmail();
+                CommentsModel comment = new CommentsModel(text, eOwner);
+                reference.child(key).push().setValue(comment);
+
+            }
+        });
+
+
+         reference.child(key).addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 commentsList.removeAll(commentsList);
+                 for (DataSnapshot snap: dataSnapshot.getChildren()) {
+                     CommentsModel comment = snap.getValue(CommentsModel.class);
+                     commentsList.add(comment);
+                     adapter.notifyDataSetChanged();
+                 }
+             }
+
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         });
+
+
+
+
     }
 }

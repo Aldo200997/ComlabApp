@@ -1,12 +1,14 @@
 package com.project.comlab.comlabapp.POJO;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.List;
 
 /**
  * Created by aldodev20 on 24/04/17.
  */
 
-public class NewsModel {
+public class NewsModel{
 
     private String title;
     private String description;
@@ -17,13 +19,7 @@ public class NewsModel {
     private String tag;
     private String key;
 
-    private List<CommentsModel> commentsList;
-
-
-
     public NewsModel(){}
-
-
 
     public NewsModel(String title, String description, String image, String owner, String emailOwner, String tag){
         this.title = title;
@@ -33,6 +29,7 @@ public class NewsModel {
         this.emailOwner = emailOwner;
         this.tag = tag;
 
+
     }
 
     public NewsModel(String title, String description, String owner, String emailOwner, String tag){
@@ -41,6 +38,7 @@ public class NewsModel {
         this.owner = owner;
         this.emailOwner = emailOwner;
         this.tag = tag;
+
 
     }
 
@@ -100,9 +98,6 @@ public class NewsModel {
         this.emailOwner = emailOwner;
     }
 
-    public void setCommentsList(List<CommentsModel> commentsList){
-        this.commentsList = commentsList;
-    }
 
     public String getKey() {
         return key;
@@ -112,14 +107,10 @@ public class NewsModel {
         this.key = key;
     }
 
-    public List<CommentsModel> getCommentsList(){
-        return commentsList;
-    }
 
     public void setValues(NewsModel news){
         this.title = news.title;
         this.description = news.description;
     }
-
 
 }

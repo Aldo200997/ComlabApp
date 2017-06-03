@@ -1,8 +1,14 @@
 package com.project.comlab.comlabapp.POJO;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ThrowOnExtraProperties;
+
+import java.util.List;
+
 /**
  * Created by aldodev20 on 30/04/17.
  */
+
 
 public class EventsModel {
 
@@ -130,6 +136,5 @@ public class EventsModel {
         this.date = event.date;
         this.time = event.time;
     }
-
 
 }

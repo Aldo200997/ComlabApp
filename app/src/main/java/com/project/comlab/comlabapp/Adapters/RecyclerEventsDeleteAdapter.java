@@ -42,6 +42,7 @@ public class RecyclerEventsDeleteAdapter extends RecyclerView.Adapter<RecyclerEv
     TextInputEditText et_time;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference comments;
     private int dia, mes, anio, hora, minutos;
 
 
@@ -57,6 +58,7 @@ public class RecyclerEventsDeleteAdapter extends RecyclerView.Adapter<RecyclerEv
         this.context = context;
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("events");
+        comments = database.getReference("comments").child("events");
     }
 
     @Override
@@ -80,6 +82,7 @@ public class RecyclerEventsDeleteAdapter extends RecyclerView.Adapter<RecyclerEv
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, EventDetailActivity.class);
+                //intent.putExtra("key", eventsList.get(position).getKey());
                 intent.putExtra("title", eventsList.get(position).getTitle());
                 intent.putExtra("place", eventsList.get(position).getAdress());
                 intent.putExtra("description", eventsList.get(position).getDescription());
@@ -109,6 +112,8 @@ public class RecyclerEventsDeleteAdapter extends RecyclerView.Adapter<RecyclerEv
 
     private void remove(EventsModel event){
         reference.child(event.getKey()).removeValue();
+        comments.child(event.getKey()).removeValue();
+
     }
 
     private void update(final EventsModel event){

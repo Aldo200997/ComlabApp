@@ -1,24 +1,20 @@
 package com.project.comlab.comlabapp.POJO;
 
 /**
- * Created by aldodev20 on 14/05/17.
+ * Created by aldodev20 on 02/06/17.
  */
 
 public class CommentsModel {
 
-    private String key;
     private String text;
     private String emailOwner;
+    private String key;
 
     public CommentsModel(){}
 
     public CommentsModel(String text, String emailOwner){
         this.text = text;
         this.emailOwner = emailOwner;
-    }
-
-    public CommentsModel(String text){
-        this.text = text;
     }
 
     public String getText() {
@@ -45,7 +41,7 @@ public class CommentsModel {
         this.key = key;
     }
 
-    public void setValues(CommentsModel comments){
-        this.text = comments.text;
+    public void setValues(CommentsModel comment){
+        this.text = comment.text;
     }
 }

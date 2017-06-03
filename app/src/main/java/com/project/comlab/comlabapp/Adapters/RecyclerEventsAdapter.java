@@ -17,6 +17,7 @@ import com.project.comlab.comlabapp.Activities.EventDetailActivity;
 import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -63,6 +64,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, EventDetailActivity.class);
+                intent.putExtra("key", eventsList.get(position).getKey());
                 intent.putExtra("title", eventsList.get(position).getTitle());
                 intent.putExtra("place", eventsList.get(position).getAdress());
                 intent.putExtra("description", eventsList.get(position).getDescription());

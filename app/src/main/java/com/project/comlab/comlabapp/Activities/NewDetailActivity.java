@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,8 +20,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Adapters.RecyclerCommentsAdapter;
 import com.project.comlab.comlabapp.POJO.CommentsModel;
+import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +44,7 @@ public class NewDetailActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+
     String key = "";
 
 
@@ -52,8 +54,9 @@ public class NewDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_detail);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("news");
+        reference = database.getReference("comments").child("news");
         mAuth = FirebaseAuth.getInstance();
+
 
         tv_title = (TextView) findViewById(R.id.new_title_detail);
         tv_owner = (TextView) findViewById(R.id.new_owner_detail);
@@ -69,7 +72,7 @@ public class NewDetailActivity extends AppCompatActivity {
         rv_comments.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         commentsList = new ArrayList<>();
 
-        adapter = new RecyclerCommentsAdapter(commentsList);
+        adapter = new RecyclerCommentsAdapter(this, getApplicationContext(),commentsList);
 
         rv_comments.setAdapter(adapter);
 
@@ -91,67 +94,39 @@ public class NewDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String comment = et_comment.getText().toString();
+                String text = et_comment.getText().toString();
 
-                if(comment.equals("")){
+                if(text.equals("")){
                     Toast.makeText(getApplicationContext(), "Campo de comentario vacio", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 FirebaseUser user = mAuth.getCurrentUser();
-                String emailOwner = user.getEmail();
-                CommentsModel commentModel = new CommentsModel(comment, emailOwner);
-                reference.child(key).child("comments").push().setValue(commentModel);
+                String eOwner = user.getEmail();
+                CommentsModel comments = new CommentsModel(text, eOwner);
+                reference.child(key).push().setValue(comments);
             }
         });
 
 
 
 
-         reference.child(key).child("comments").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                CommentsModel commentsModel = dataSnapshot.getValue(CommentsModel.class);
-                commentsModel.setKey(dataSnapshot.getKey());
-                commentsList.add(commentsModel);
-                adapter.notifyDataSetChanged();
+         reference.child(key).addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 commentsList.removeAll(commentsList);
+                 for (DataSnapshot snap: dataSnapshot.getChildren()) {
+                     CommentsModel comment = snap.getValue(CommentsModel.class);
+                     commentsList.add(comment);
+                     adapter.notifyDataSetChanged();
+                 }
+             }
 
-            }
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                String key = dataSnapshot.getKey();
-                CommentsModel commentsModel = dataSnapshot.getValue(CommentsModel.class);
-                for (CommentsModel cm: commentsList) {
-                    if(cm.getKey().equals(key)){
-                        cm.setValues(commentsModel);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                String key = dataSnapshot.getKey();
-                for (CommentsModel cm: commentsList) {
-                    if(cm.getKey().equals(key)){
-                        commentsList.remove(cm);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+             }
+         });
 
 
     }

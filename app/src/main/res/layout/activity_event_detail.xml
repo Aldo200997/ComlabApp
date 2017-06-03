@@ -159,6 +159,46 @@
 
             </LinearLayout>
 
+            <View style="@style/Divider"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Comentarios:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:paddingTop="10dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/event_rv_comments_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"/>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextBlack">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/event_et_comment_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Escribir comentario..."/>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/event_btn_comment_detail"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Comentar"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:theme="@style/CommentButton"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

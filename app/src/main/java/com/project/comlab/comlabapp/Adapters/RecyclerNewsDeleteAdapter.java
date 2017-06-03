@@ -4,19 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +20,6 @@ import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -41,6 +35,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference comments;
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
@@ -54,6 +49,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
         this.newsList = newsList;
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
+        comments = database.getReference("comments").child("news");
     }
 
 
@@ -80,7 +76,6 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
                 intent.putExtra("description", newsList.get(position).getDescription());
                 intent.putExtra("owner", newsList.get(position).getOwner());
                 intent.putExtra("image", newsList.get(position).getImage());
-                intent.putExtra("comments", (Serializable) newsList.get(position).getCommentsList());
                 activity.startActivity(intent);
             }
         });
@@ -104,6 +99,7 @@ public class RecyclerNewsDeleteAdapter extends RecyclerView.Adapter<RecyclerNews
 
     public void remove(NewsModel news){
         reference.child(news.getKey()).removeValue();
+        comments.child(news.getKey()).removeValue();
     }
 
 
