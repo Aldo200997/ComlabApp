@@ -108,9 +108,9 @@ public class EventsFragment extends Fragment {
                 for (EventsModel em: eventList) {
                     if(em.getKey().equals(key)){
                         eventList.remove(em);
-                        adapter.notifyDataSetChanged();
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

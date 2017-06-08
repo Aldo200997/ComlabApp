@@ -124,8 +124,9 @@ public class EventDetailActivity extends AppCompatActivity {
                  for (DataSnapshot snap: dataSnapshot.getChildren()) {
                      CommentsModel comment = snap.getValue(CommentsModel.class);
                      commentsList.add(comment);
-                     adapter.notifyDataSetChanged();
                  }
+
+                 adapter.notifyDataSetChanged();
              }
 
              @Override

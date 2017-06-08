@@ -82,7 +82,7 @@ public class RecyclerEventsDeleteAdapter extends RecyclerView.Adapter<RecyclerEv
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, EventDetailActivity.class);
-                //intent.putExtra("key", eventsList.get(position).getKey());
+                intent.putExtra("key", eventsList.get(position).getKey());
                 intent.putExtra("title", eventsList.get(position).getTitle());
                 intent.putExtra("place", eventsList.get(position).getAdress());
                 intent.putExtra("description", eventsList.get(position).getDescription());

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,15 +71,42 @@ public class ProjectsFragment extends Fragment {
 
         rv_projects.setAdapter(adapter);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                projectList.removeAll(projectList);
-                for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    ProjectsModel project = snap.getValue(ProjectsModel.class);
-                    projectList.add(project);
-                }
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ProjectsModel project = dataSnapshot.getValue(ProjectsModel.class);
+                project.setKey(dataSnapshot.getKey());
+                projectList.add(project);
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                ProjectsModel project = dataSnapshot.getValue(ProjectsModel.class);
+                for (ProjectsModel pm: projectList) {
+                    if(pm.getKey().equals(key)){
+                        pm.setValues(project);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+                for (ProjectsModel pm: projectList) {
+                    if(pm.getKey().equals(key)){
+                        projectList.remove(pm);
+                        break;
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
             }
 

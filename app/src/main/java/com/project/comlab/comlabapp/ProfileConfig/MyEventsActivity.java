@@ -50,7 +50,7 @@ public class MyEventsActivity extends AppCompatActivity implements CreateToolbar
 
         myEventsList = new ArrayList<>();
 
-        adapter = new RecyclerEventsDeleteAdapter(this, getApplicationContext(), myEventsList);
+        adapter = new RecyclerEventsDeleteAdapter(MyEventsActivity.this, getApplicationContext(), myEventsList);
         rv.setAdapter(adapter);
 
         FirebaseUser user = mAuth.getCurrentUser();
@@ -82,9 +82,11 @@ public class MyEventsActivity extends AppCompatActivity implements CreateToolbar
                 for (EventsModel em: myEventsList) {
                     if(em.getKey().equals(key)){
                         myEventsList.remove(em);
-                        adapter.notifyDataSetChanged();
+                        break;
                     }
                 }
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override

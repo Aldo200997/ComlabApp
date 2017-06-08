@@ -32,6 +32,7 @@ public class RecyclerProjectsDeleteAdapter extends RecyclerView.Adapter<Recycler
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference comments;
     Activity activity;
     Context context;
     List<ProjectsModel> projectList;
@@ -48,6 +49,7 @@ public class RecyclerProjectsDeleteAdapter extends RecyclerView.Adapter<Recycler
         this.projectList = projectList;
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("projects");
+        comments = database.getReference("comments").child("projects");
     }
 
     @Override
@@ -70,6 +72,7 @@ public class RecyclerProjectsDeleteAdapter extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ProjectDetailActivity.class);
+                intent.putExtra("key", projectList.get(position).getKey());
                 intent.putExtra("title", projectList.get(position).getTitle());
                 intent.putExtra("description", projectList.get(position).getDescription());
                 intent.putExtra("owner", projectList.get(position).getOwner());
@@ -100,6 +103,7 @@ public class RecyclerProjectsDeleteAdapter extends RecyclerView.Adapter<Recycler
 
     private void remove(ProjectsModel projects){
         reference.child(projects.getKey()).removeValue();
+        comments.child(projects.getKey()).removeValue();
     }
 
     private void update(final ProjectsModel projects){

@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
