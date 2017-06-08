@@ -180,14 +180,14 @@ public class AddNewActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
                     String imageURL = taskSnapshot.getDownloadUrl().toString();
-                    NewsModel noticia = new NewsModel(title, description, imageURL, owner, emailOwner, tag);
+                    NewsModel noticia = new NewsModel(title, description, imageURL, owner, emailOwner, tag, 0);
                     reference.push().setValue(noticia);
                     Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
                     startActivity(intent);
                 }
             });
         }else{
-            NewsModel noticia = new NewsModel(title, description, owner, emailOwner, tag);
+            NewsModel noticia = new NewsModel(title, description, owner, emailOwner, tag, 0);
             reference.push().setValue(noticia);
             Intent intent = new Intent(AddNewActivity.this, ContainerActivity.class);
             startActivity(intent);

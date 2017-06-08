@@ -83,10 +83,10 @@ public class MyNewsActivity extends AppCompatActivity implements CreateToolbar {
                 for (NewsModel nm: myNewsList) {
                     if(nm.getKey().equals(key)){
                         myNewsList.remove(nm);
-                        adapter.notifyDataSetChanged();
-                        return;
+                        break;
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

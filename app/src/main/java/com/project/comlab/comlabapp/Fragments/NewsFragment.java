@@ -116,9 +116,10 @@ public class NewsFragment extends Fragment {
                 for (NewsModel nm: newsList) {
                     if(nm.getKey().equals(key)){
                         newsList.remove(nm);
-                        adapter.notifyDataSetChanged();
+                        break;
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
 
             @Override

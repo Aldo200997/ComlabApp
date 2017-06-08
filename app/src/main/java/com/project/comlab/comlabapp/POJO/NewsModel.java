@@ -18,26 +18,29 @@ public class NewsModel{
     private String source;
     private String tag;
     private String key;
+    private int likes;
 
     public NewsModel(){}
 
-    public NewsModel(String title, String description, String image, String owner, String emailOwner, String tag){
+    public NewsModel(String title, String description, String image, String owner, String emailOwner, String tag, int likes){
         this.title = title;
         this.description = description;
         this.image = image;
         this.owner = owner;
         this.emailOwner = emailOwner;
         this.tag = tag;
+        this.likes = likes;
 
 
     }
 
-    public NewsModel(String title, String description, String owner, String emailOwner, String tag){
+    public NewsModel(String title, String description, String owner, String emailOwner, String tag, int likes){
         this.title = title;
         this.description = description;
         this.owner = owner;
         this.emailOwner = emailOwner;
         this.tag = tag;
+        this.likes = likes;
 
 
     }
@@ -113,4 +116,11 @@ public class NewsModel{
         this.description = news.description;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
 }

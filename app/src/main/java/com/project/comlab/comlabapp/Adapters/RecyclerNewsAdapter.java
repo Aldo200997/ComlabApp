@@ -11,11 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.codesgood.views.JustifiedTextView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
@@ -38,6 +44,10 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     List<NewsModel> newsList;
     Activity activity;
     Context context;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    boolean checked = false;
+
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
@@ -52,6 +62,8 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         this.newsList = newsList;
         this.activity = activity;
         this.context = context;
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("news");
     }
 
     @Override
@@ -64,7 +76,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
         //Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
@@ -82,6 +94,20 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
                 activity.startActivity(intent);
             }
         });
+
+
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+                if(holder.like.isChecked()){
+                    int numLikes = newsList.get(position).getLikes() + 1;
+                    reference.child(newsList.get(position).getKey()).child("likes").setValue(numLikes);
+                    newsList.get(position).setLikes(numLikes);
+                }
+            }
+        });
     }
 
     @Override
@@ -95,6 +121,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         TextView description;
         ImageView image;
         CardView cardview;
+        CheckBox like;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +130,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             description = (TextView) itemView.findViewById(R.id.item_news_description);
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
             image = (ImageView) itemView.findViewById(R.id.item_news_image);
+            like = (CheckBox) itemView.findViewById(R.id.item_news_checkbox_like);
         }
     }
 }
