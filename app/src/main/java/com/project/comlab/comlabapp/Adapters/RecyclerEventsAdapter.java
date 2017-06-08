@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -16,6 +18,8 @@ import com.codesgood.views.JustifiedTextView;
 import com.project.comlab.comlabapp.Activities.EventDetailActivity;
 import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.R;
+import com.project.comlab.comlabapp.SearchV.CustomFilterEvents;
+import com.project.comlab.comlabapp.SearchV.ItemClickListener;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,11 +28,12 @@ import java.util.List;
  * Created by aldodev20 on 01/05/17.
  */
 
-public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAdapter.ViewHolder> {
+public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAdapter.ViewHolder> implements Filterable {
 
-    List<EventsModel> eventsList;
+    public List<EventsModel> eventsList, filterEventsList;
     Activity activity;
     Context context;
+    CustomFilterEvents filterEvents;
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
@@ -38,6 +43,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
 
     public RecyclerEventsAdapter(Activity activity, Context context, List<EventsModel> eventsList){
         this.eventsList = eventsList;
+        this.filterEventsList = eventsList;
         this.activity = activity;
         this.context = context;
     }
@@ -79,6 +85,15 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
     @Override
     public int getItemCount() {
         return eventsList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filterEvents == null){
+            filterEvents = new CustomFilterEvents(filterEventsList, this);
+        }
+
+        return filterEvents;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -88,6 +88,9 @@ public class NewDetailActivity extends AppCompatActivity {
             tv_description.setText(description);
             Picasso.with(getApplicationContext()).load(image).into(iv_image);
 
+        }else{
+            et_comment.setVisibility(View.GONE);
+            btn_comment.setVisibility(View.GONE);
         }
 
         btn_comment.setOnClickListener(new View.OnClickListener() {

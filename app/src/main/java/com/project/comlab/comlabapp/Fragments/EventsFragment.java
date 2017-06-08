@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,8 @@ public class EventsFragment extends Fragment {
     RecyclerEventsAdapter adapter;
     List<EventsModel> eventList;
 
+    SearchView search;
+
 
     public EventsFragment() {
         // Required empty public constructor
@@ -60,6 +63,7 @@ public class EventsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         reference = database.getReference("events");
 
+        search = (SearchView) view.findViewById(R.id.search_events);
         showToolbar(view, "Eventos", false);
 
         rv_events = (RecyclerView) view.findViewById(R.id.rv_events);
@@ -80,6 +84,19 @@ public class EventsFragment extends Fragment {
 
         adapter = new RecyclerEventsAdapter(getActivity(), getContext(), eventList);
         rv_events.setAdapter(adapter);
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -108,6 +125,7 @@ public class EventsFragment extends Fragment {
                 for (EventsModel em: eventList) {
                     if(em.getKey().equals(key)){
                         eventList.remove(em);
+                        break;
                     }
                 }
                 adapter.notifyDataSetChanged();
