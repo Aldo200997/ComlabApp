@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public class NewsFragment extends Fragment {
     List<NewsModel> newsList;
 
     FloatingActionButton fab;
+    SearchView search;
 
 
 
@@ -60,7 +62,7 @@ public class NewsFragment extends Fragment {
 
         showToolbar(view, "Aportes", false);
 
-
+        search = (SearchView) view.findViewById(R.id.search_news);
 
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -71,9 +73,6 @@ public class NewsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
 
         // RecyclerView
         rv_news = (RecyclerView) view.findViewById(R.id.rv_news);
@@ -87,6 +86,21 @@ public class NewsFragment extends Fragment {
         // Adapter RV
         adapter = new RecyclerNewsAdapter(getActivity(), getContext(), newsList);
         rv_news.setAdapter(adapter);
+
+        // SearchView
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override

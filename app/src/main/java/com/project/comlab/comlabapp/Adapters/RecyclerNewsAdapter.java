@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.project.comlab.comlabapp.Activities.NewDetailActivity;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
+import com.project.comlab.comlabapp.SearchV.CustomFilter;
+import com.project.comlab.comlabapp.SearchV.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -39,14 +44,14 @@ import java.util.Timer;
  * Created by aldodev20 on 24/04/17.
  */
 
-public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapter.ViewHolder> {
+public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapter.ViewHolder> implements Filterable{
 
-    List<NewsModel> newsList;
+    public List<NewsModel> newsList, filterList;
+    CustomFilter filter;
     Activity activity;
     Context context;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    boolean checked = false;
 
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
@@ -62,6 +67,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         this.newsList = newsList;
         this.activity = activity;
         this.context = context;
+        this.filterList = newsList;
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("news");
     }
@@ -95,12 +101,18 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             }
         });
 
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Snackbar.make(v, newsList.get(position).getTitle(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
                 if(holder.like.isChecked()){
                     int numLikes = newsList.get(position).getLikes() + 1;
                     reference.child(newsList.get(position).getKey()).child("likes").setValue(numLikes);
@@ -115,13 +127,25 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         return newsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public Filter getFilter() {
+
+        if(filter == null){
+            // Hacemos instancia de CustomFilter
+            filter = new CustomFilter(filterList, this);
+        }
+        return filter;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView title;
         TextView description;
         ImageView image;
         CardView cardview;
         CheckBox like;
+
+        ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -131,6 +155,16 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
             image = (ImageView) itemView.findViewById(R.id.item_news_image);
             like = (CheckBox) itemView.findViewById(R.id.item_news_checkbox_like);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            this.itemClickListener.onItemClick(v, getLayoutPosition());
+        }
+
+        public void setItemClickListener(ItemClickListener ic){
+            this.itemClickListener = ic;
         }
     }
 }
