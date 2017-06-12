@@ -62,6 +62,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
         holder.title.setText(projectList.get(position).getTitle());
         holder.description.setText(projectList.get(position).getDescription());
         holder.owner.setText(projectList.get(position).getOwner());
+        holder.tag.setText(projectList.get(position).getTag());
         holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +101,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
         TextView title;
         TextView description;
         CardView cardView;
+        TextView tag;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -110,6 +112,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
             title = (TextView) itemView.findViewById(R.id.item_project_title);
             description = (TextView) itemView.findViewById(R.id.item_project_description);
             cardView = (CardView) itemView.findViewById(R.id.item_project_card);
+            tag = (TextView) itemView.findViewById(R.id.item_projects_tag);
         }
     }
 }

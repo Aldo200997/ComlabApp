@@ -64,6 +64,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
         holder.description.setText(eventsList.get(position).getDescription());
         holder.date.setText(eventsList.get(position).getDate());
         holder.time.setText(eventsList.get(position).getTime());
+        holder.tag.setText(eventsList.get(position).getTag());
         holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
         holder.rating.setNumStars(5);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +104,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
         TextView description;
         TextView date;
         TextView time;
+        TextView tag;
         ImageView image;
         RatingBar rating;
         CardView cardView;
@@ -115,6 +117,7 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
             description = (TextView) itemView.findViewById(R.id.item_events_description);
             date = (TextView) itemView.findViewById(R.id.item_events_date);
             time = (TextView) itemView.findViewById(R.id.item_events_time);
+            tag = (TextView) itemView.findViewById(R.id.item_events_tag);
             image = (ImageView) itemView.findViewById(R.id.item_events_image);
             rating = (RatingBar) itemView.findViewById(R.id.item_events_rb);
             cardView = (CardView) itemView.findViewById(R.id.item_events_card);

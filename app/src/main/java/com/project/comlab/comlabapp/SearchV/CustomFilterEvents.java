@@ -32,7 +32,7 @@ public class CustomFilterEvents extends Filter {
             List<EventsModel> eventsFilterList = new ArrayList<>();
 
             for (int i = 0; i < eventsList.size(); i++){
-                if(eventsList.get(i).getTitle().toUpperCase().contains(constraint)){
+                if(eventsList.get(i).getTitle().toUpperCase().contains(constraint) || eventsList.get(i).getTag().toUpperCase().contains(constraint)){
                     eventsFilterList.add(eventsList.get(i));
                 }
             }

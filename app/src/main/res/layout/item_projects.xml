@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="2.3"
+            android:layout_weight="2.1"
             android:gravity="center">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.7">
+            android:layout_weight="0.9">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -91,10 +91,31 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus fascinante al cine aver hasta donde puede llegar este texto"
+                android:text="Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit vel nulla non posuere. Nam sed rutrum eros, ut mollis nulla. Phasellus et purus ac velit finibus lobortis in non nulla. Curabitur luctus dolor nisi, at cursus tortor maximus id. Donec rhoncus eros vitae eros interdum, placerat pulvinar tellus fascinante al cine aver hasta donde puede llegar este texto  A VER HASTA DONDE LLEGA ESTE TEXTO DE PRUEBA"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:maxLength="450" />
+                android:maxLength="390" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_gravity="bottom|left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/tag"
+                android:layout_marginRight="3dp"/>
+
+            <TextView
+                android:id="@+id/item_projects_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Machine learning" />
 
         </LinearLayout>
 

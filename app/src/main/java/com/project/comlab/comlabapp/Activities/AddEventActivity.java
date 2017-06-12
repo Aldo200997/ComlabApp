@@ -2,6 +2,7 @@ package com.project.comlab.comlabapp.Activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,12 +10,16 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -57,11 +62,19 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     Button btn_date, btn_time;
     Button btn_add;
     Button photo;
+    Button btn_tag;
 
     private int dia, mes, anio, hora, minutos;
 
     String path;
     Intent gallery = null;
+
+    // alertDialog
+    String value;
+    String [] preferences = {"Realidad Aumentada", "Realidad Virtual", "Videojuegos",
+            "Machine Learning", "Big Data", "Internet of Things", "Movilidad", "Web",
+            "Ecommerce", "Emprendimiento", "Seguridad informática", "Otros"};
+
 
 
     @Override
@@ -94,6 +107,14 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 setPicture();
+            }
+        });
+
+        btn_tag = (Button) findViewById(R.id.add_event_button_tag);
+        btn_tag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTag();
             }
         });
 
@@ -239,5 +260,35 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void getTag(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(AddEventActivity.this);
+        alert.setTitle("Elegir tag");
+        View view = AddEventActivity.this.getLayoutInflater().inflate(R.layout.item_dialog_tag, null);
+
+        final ListView lv = (ListView) view.findViewById(R.id.item_dialog_tag_list);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, preferences);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                view.setSelected(true);
+                value = preferences[position];
+            }
+        });
+
+
+        alert.setCancelable(true);
+        alert.setPositiveButton("Seleccionar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                et_tag.setText(value);
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        dialog.setView(view);
+
+        dialog.show();
     }
 }

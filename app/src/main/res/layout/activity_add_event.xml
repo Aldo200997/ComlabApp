@@ -114,6 +114,14 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/add_event_button_tag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/tagb"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

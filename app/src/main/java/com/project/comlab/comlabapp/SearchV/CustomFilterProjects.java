@@ -31,7 +31,7 @@ public class CustomFilterProjects extends Filter {
             List<ProjectsModel> projectsFilterList = new ArrayList<>();
 
             for(int i = 0; i < projectsList.size(); i++){
-                if(projectsList.get(i).getTitle().toUpperCase().contains(constraint)){
+                if(projectsList.get(i).getTitle().toUpperCase().contains(constraint) || projectsList.get(i).getTag().toUpperCase().contains(constraint)){
                     projectsFilterList.add(projectsList.get(i));
                 }
             }

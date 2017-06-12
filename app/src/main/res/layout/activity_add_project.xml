@@ -46,12 +46,12 @@
 
 
             <Button
-                android:id="@+id/add_project_button_photo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/camera"
+                android:id="@+id/add_project_button_tag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/tagb"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="20dp" />
 
 
             <android.support.design.widget.TextInputLayout
@@ -64,6 +64,15 @@
                     android:layout_height="wrap_content"
                     android:hint="agregar tag"/>
             </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/add_project_button_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/camera"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+
 
             <Button
                 android:id="@+id/add_project_button"
