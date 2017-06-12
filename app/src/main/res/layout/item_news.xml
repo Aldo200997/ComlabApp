@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="240dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true">
@@ -19,7 +19,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.70">
+            android:layout_weight="0.65"
+            android:background="@color/blue">
 
             <ImageView
                 android:id="@+id/item_news_image"
@@ -33,7 +34,7 @@
                 android:paddingRight="10dp"
                 android:layout_gravity="bottom|end"
                 android:gravity="right"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="4dp">
 
                 <CheckBox
                     android:id="@+id/item_news_checkbox_like"
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.30"
+            android:layout_weight="0.35"
             android:background="@color/white">
 
 
@@ -71,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUEBA DE TEXTO"
+                android:text="DESCRIPCION, ESTA SERA LA DESCRIPCION DE CADA UNO DE LOS APORTES DE LOS USUARIOS QUE SUBAN EN NUESTRA PLATAFORMA ESTA ES UNA PRUEBA HOLA COMO ESTAS ME LLAMO OMAR ALDAIR ROMERO PEREZ Y ESTA ES UNA PRUEBA DE TEXTO PARA OBSERVAR COMO SE ACOMODA LA VISTA"
                 android:textSize="12sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -79,6 +80,26 @@
 
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom|right"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/tag"
+                android:layout_marginRight="3dp"/>
+
+            <TextView
+                android:id="@+id/item_news_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Machine learning" />
         </LinearLayout>
 
     </LinearLayout>

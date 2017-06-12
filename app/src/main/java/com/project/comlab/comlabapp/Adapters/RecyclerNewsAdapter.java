@@ -86,6 +86,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         holder.title.setText(newsList.get(position).getTitle());
         holder.description.setText(newsList.get(position).getDescription());
         //Picasso.with(context).load(newsList.get(position).getImage()).into(holder.image);
+        holder.tag.setText(newsList.get(position).getTag());
         holder.image.setBackgroundColor(context.getResources().getColor(colors[(position + randomNum) % 9]));
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +142,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
 
         TextView title;
         TextView description;
+        TextView tag;
         ImageView image;
         CardView cardview;
         CheckBox like;
@@ -155,6 +157,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
             cardview = (CardView) itemView.findViewById(R.id.item_news_card);
             image = (ImageView) itemView.findViewById(R.id.item_news_image);
             like = (CheckBox) itemView.findViewById(R.id.item_news_checkbox_like);
+            tag = (TextView) itemView.findViewById(R.id.item_news_tag);
             itemView.setOnClickListener(this);
         }
 

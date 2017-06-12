@@ -36,7 +36,7 @@ public class CustomFilter extends Filter {
             for (int i = 0; i < newsList.size(); i++){
 
                 // Si en la lista general el titulo de una pub esta contenido en el texto del searchview
-                if(newsList.get(i).getTitle().toUpperCase().contains(constraint)){
+                if(newsList.get(i).getTitle().toUpperCase().contains(constraint) || newsList.get(i).getTag().toUpperCase().contains(constraint)){
                     // Entonces a la lista especifica agregarle lo que trajo la lista general
                     newsFilterList.add(newsList.get(i));
                 }

@@ -117,12 +117,6 @@ public class AddNewActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Validacion de tag
-
-                if(!tag.contentEquals(preferences.toString())){
-                    Toast.makeText(getApplicationContext(), "Tag no válido", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user != null){
