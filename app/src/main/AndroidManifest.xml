@@ -30,7 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Activities.InterestedActivity" />
         <activity android:name=".Activities.ContainerActivity" />
         <activity
             android:name=".Activities.AddNewActivity"
@@ -46,16 +45,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.ContainerActivity" />
         </activity>
-
         <activity
             android:name=".Activities.AddProjectActivity"
             android:parentActivityName=".Activities.ContainerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activities.ContainerActivity"/>
+                android:value=".Activities.ContainerActivity" />
         </activity>
-
-
         <activity android:name=".Activities.NewDetailActivity" />
         <activity android:name=".Activities.EventDetailActivity" />
         <activity android:name=".Activities.ProjectDetailActivity" />
@@ -63,7 +59,8 @@
         <activity android:name=".ProfileConfig.MyNewsActivity" />
         <activity android:name=".ProfileConfig.EditProfileActivity" />
         <activity android:name=".ProfileConfig.MyEventsActivity" />
-        <activity android:name=".ProfileConfig.MyProjectsActivity"></activity>
+        <activity android:name=".ProfileConfig.MyProjectsActivity" />
+        <activity android:name=".Activities.InfoPreferencesActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class ProjectsFragment extends Fragment {
     private DatabaseReference reference;
     List<ProjectsModel> projectList;
     FloatingActionButton fab;
+    SearchView search;
 
 
     public ProjectsFragment() {
@@ -53,6 +55,8 @@ public class ProjectsFragment extends Fragment {
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("projects");
+
+        search = (SearchView) view.findViewById(R.id.search_projects);
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +74,19 @@ public class ProjectsFragment extends Fragment {
         adapter = new RecyclerProjectsAdapter(getActivity(), getContext(), projectList);
 
         rv_projects.setAdapter(adapter);
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         reference.addChildEventListener(new ChildEventListener() {
             @Override

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.project.comlab.comlabapp.Activities.ContainerActivity;
 import com.project.comlab.comlabapp.Activities.CreateAccountActivity;
+import com.project.comlab.comlabapp.Activities.InfoPreferencesActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
+
+                /*Intent intent = new Intent(MainActivity.this, InfoPreferencesActivity.class);
+                startActivity(intent);*/
             }
         });
 

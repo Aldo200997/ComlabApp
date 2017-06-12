@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.project.comlab.comlabapp.Activities.InfoPreferencesActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:id="@+id/info_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/first_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tenemos 4 secciones específicas: Aportes, Eventos, Proyectos y Perfil"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/cdos"
+                android:layout_gravity="center" />
+
+
+            <TextView
+                android:id="@+id/second_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puedes buscar cualquier contenido a través del buscador"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"/>
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/csearch"
+                android:layout_gravity="center" />
+
+
+            <TextView
+                android:id="@+id/third_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puedes buscar también por los siguientes tags:"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_preferences"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/info_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Siguiente"
+                android:theme="@style/RaisedButton"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>
+
+

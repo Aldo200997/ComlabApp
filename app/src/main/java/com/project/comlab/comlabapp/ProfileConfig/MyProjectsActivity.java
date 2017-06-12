@@ -80,9 +80,11 @@ public class MyProjectsActivity extends AppCompatActivity implements CreateToolb
                 for (ProjectsModel pm: myProjectList) {
                     if(pm.getKey().equals(key)){
                         myProjectList.remove(pm);
-                        adapter.notifyDataSetChanged();
+                        break;
                     }
                 }
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override

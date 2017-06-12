@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.codesgood.views.JustifiedTextView;
 import com.project.comlab.comlabapp.Activities.ProjectDetailActivity;
 import com.project.comlab.comlabapp.POJO.ProjectsModel;
 import com.project.comlab.comlabapp.R;
+import com.project.comlab.comlabapp.SearchV.CustomFilterProjects;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,11 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by aldodev20 on 13/05/17.
  */
 
-public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjectsAdapter.ViewHolder>{
+public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjectsAdapter.ViewHolder> implements Filterable{
 
-    List<ProjectsModel> projectList;
+    public List<ProjectsModel> projectList, filterProjectsList;
     Context context;
     Activity activity;
+    CustomFilterProjects filterProjects;
 
     int[] colors = {R.color.black, R.color.purple, R.color.indigo, R.color.blue, R.color.cyan,
             R.color.green, R.color.yellow, R.color.orange, R.color.brown};
@@ -40,6 +44,7 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
     public RecyclerProjectsAdapter(Activity activity, Context context, List<ProjectsModel> projectList){
         this.context = context;
         this.projectList = projectList;
+        this.filterProjectsList = projectList;
         this.activity = activity;
     }
 
@@ -76,6 +81,15 @@ public class RecyclerProjectsAdapter extends RecyclerView.Adapter<RecyclerProjec
     @Override
     public int getItemCount() {
         return projectList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filterProjects == null){
+            filterProjects = new CustomFilterProjects(filterProjectsList, this);
+        }
+
+        return filterProjects;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

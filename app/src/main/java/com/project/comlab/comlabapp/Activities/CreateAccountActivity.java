@@ -105,7 +105,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                            Intent intent = new Intent(CreateAccountActivity.this, InfoPreferencesActivity.class);
                             startActivity(intent);
                         }
                     }
