@@ -45,6 +45,14 @@
                     android:hint="Agrega una descripción" />
             </android.support.design.widget.TextInputLayout>
 
+            <Button
+                android:id="@+id/add_new_button_tag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/tag"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"/>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
