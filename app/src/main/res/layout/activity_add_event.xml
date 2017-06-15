@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.comlab.comlabapp.Activities.AddEventActivity">
+    tools:context="com.project.comlab.comlabapp.Activities.AddEventActivity"
+    android:background="@color/white">
 
     <include layout="@layout/toolbar"/>
 
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="12dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -44,13 +45,22 @@
                     android:hint="Agrega un descripción" />
             </android.support.design.widget.TextInputLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregue una fotografía (Opcional)"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
             <Button
                 android:id="@+id/add_event_button_photo"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/camera"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="1dp"/>
 
 
             <LinearLayout
@@ -58,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -67,6 +78,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_switchOne"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -89,6 +101,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_switchTwo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -111,6 +124,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_switchThree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -132,76 +146,355 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_adress"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true"
+                android:background="@color/colorAccent"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Dirección" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Primera sede"/>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_adress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Dirección" />
+                    </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_activities"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Actividades" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_date_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/calendar"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una fecha"/>
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_time_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/clock"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_time"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una hora" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agregar una ubicación"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:id="@+id/add_event_button_map"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ubicacion"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_adress_two"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true"
+                android:background="@color/colorAccent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Dirección (2)" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Segunda sede"/>
 
 
-            <android.support.design.widget.TextInputLayout
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_adress_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Dirección" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_activities_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Actividades" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_date_two_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/calendar"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_date_two"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una fecha"/>
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_time_two_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/clock"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_time_two"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una hora" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agregar una ubicación"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:id="@+id/add_event_button_map_two"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ubicacion"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_adress_three"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true"
+                android:background="@color/colorAccent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Dirección (3)" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tercera sede"/>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_activities"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Actividades" />
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_adress_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Dirección" />
+                    </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_activities_two"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Actividades (2)" />
-            </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditTextEvents">
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_event_activities_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Actividades" />
+                    </android.support.design.widget.TextInputLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_activities_three"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Actividades (3)" />
-            </android.support.design.widget.TextInputLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_date_three_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/calendar"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_date_three"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una fecha"/>
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/add_event_time_three_btn"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/clock"
+                            android:layout_marginTop="5dp"/>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents">
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/add_event_time_three"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Agrega una hora" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agregar una ubicación"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:id="@+id/add_event_button_map_three"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/ubicacion"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,77 +502,26 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/add_event_date_btn"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/calendar"
-                    android:layout_marginTop="5dp"/>
+                    android:id="@+id/add_event_button_tag"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/tagb"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/EditTextBlack">
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/add_event_date"
+                        android:id="@+id/add_event_tag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Agrega una fecha"/>
+                        android:hint="Agrega un tag" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/add_event_time_btn"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/clock"
-                    android:layout_marginTop="5dp"/>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/EditTextBlack">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/add_event_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Agrega una hora" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/add_event_button_tag"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/tagb"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_event_tag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Agrega un tag" />
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/add_event_button_map"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ubicacion"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/add_event_btn"

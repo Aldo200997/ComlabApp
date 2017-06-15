@@ -13,6 +13,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -58,13 +60,22 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     String title;
     String description;
     String adress;
+    String adress_two;
+    String adress_three;
+    String activities;
+    String activities_two;
+    String activities_three;
     String date;
+    String date_two;
+    String date_three;
     String time;
+    String time_two;
+    String time_three;
     String tag;
     String owner;
     String emailOwner;
 
-    Button btn_date, btn_time;
+    Button btn_date, btn_date_two, btn_date_three, btn_time, btn_time_two, btn_time_three;
     Button btn_add;
     Button photo;
     Button btn_tag;
@@ -86,7 +97,14 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     SwitchCompat one, two, three;
     TextInputEditText et_adress_two, et_adress_three;
     TextInputEditText et_activities_two, et_activities_three;
+    TextInputEditText et_date_two, et_date_three;
+    TextInputEditText et_time_two, et_time_three;
     TextView n_one, n_two, n_three;
+
+
+    // CardViews
+    CardView c_one, c_two, c_three;
+
 
 
 
@@ -104,9 +122,17 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         showToolbar("Agregar Evento", true);
 
         btn_date = (Button) findViewById(R.id.add_event_date_btn);
+        btn_date_two = (Button) findViewById(R.id.add_event_date_two_btn);
+        btn_date_three = (Button) findViewById(R.id.add_event_date_three_btn);
         btn_time = (Button) findViewById(R.id.add_event_time_btn);
+        btn_time_two = (Button) findViewById(R.id.add_event_time_two_btn);
+        btn_time_three = (Button) findViewById(R.id.add_event_time_three_btn);
         btn_date.setOnClickListener(this);
+        btn_date_two.setOnClickListener(this);
+        btn_date_three.setOnClickListener(this);
         btn_time.setOnClickListener(this);
+        btn_time_two.setOnClickListener(this);
+        btn_time_three.setOnClickListener(this);
 
         et_title = (TextInputEditText) findViewById(R.id.add_event_title);
         et_description = (TextInputEditText) findViewById(R.id.add_event_description);
@@ -114,11 +140,19 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         et_adress_two = (TextInputEditText) findViewById(R.id.add_event_adress_two);
         et_adress_three = (TextInputEditText) findViewById(R.id.add_event_adress_three);
         et_date = (TextInputEditText) findViewById(R.id.add_event_date);
+        et_date_two = (TextInputEditText) findViewById(R.id.add_event_date_two);
+        et_date_three = (TextInputEditText) findViewById(R.id.add_event_date_three);
         et_time = (TextInputEditText) findViewById(R.id.add_event_time);
+        et_time_two = (TextInputEditText) findViewById(R.id.add_event_time_two);
+        et_time_three = (TextInputEditText) findViewById(R.id.add_event_time_three);
         et_tag = (TextInputEditText) findViewById(R.id.add_event_tag);
         et_activities = (TextInputEditText) findViewById(R.id.add_event_activities);
         et_activities_two = (TextInputEditText) findViewById(R.id.add_event_activities_two);
         et_activities_three = (TextInputEditText) findViewById(R.id.add_event_activities_three);
+
+        c_one = (CardView) findViewById(R.id.card_one);
+        c_two = (CardView) findViewById(R.id.card_two);
+        c_three = (CardView) findViewById(R.id.card_three);
 
         n_one = (TextView) findViewById(R.id.number_one);
         n_two = (TextView) findViewById(R.id.number_two);
@@ -132,12 +166,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         three.setChecked(false);
 
         if(!one.isChecked() && !two.isChecked() && !three.isChecked()){
-            et_adress.setVisibility(View.GONE);
-            et_adress_two.setVisibility(View.GONE);
-            et_adress_three.setVisibility(View.GONE);
-            et_activities.setVisibility(View.GONE);
-            et_activities_two.setVisibility(View.GONE);
-            et_activities_three.setVisibility(View.GONE);
+            c_one.setVisibility(View.GONE);
+            c_two.setVisibility(View.GONE);
+            c_three.setVisibility(View.GONE);
         }
 
 
@@ -145,24 +176,22 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    et_adress.setVisibility(View.VISIBLE);
-                    et_adress_two.setVisibility(View.GONE);
-                    et_adress_three.setVisibility(View.GONE);
-                    et_activities.setVisibility(View.VISIBLE);
-                    et_activities_two.setVisibility(View.GONE);
-                    et_activities_three.setVisibility(View.GONE);
+                    c_one.setVisibility(View.VISIBLE);
+                    c_two.setVisibility(View.GONE);
+                    c_three.setVisibility(View.GONE);
+
                     two.setVisibility(View.GONE);
                     three.setVisibility(View.GONE);
                     n_one.setVisibility(View.VISIBLE);
                     n_two.setVisibility(View.GONE);
                     n_three.setVisibility(View.GONE);
                 }else{
-                    et_adress.setVisibility(View.GONE);
-                    et_adress_two.setVisibility(View.GONE);
-                    et_adress_three.setVisibility(View.GONE);
-                    et_activities.setVisibility(View.GONE);
-                    et_activities_two.setVisibility(View.GONE);
-                    et_activities_three.setVisibility(View.GONE);
+
+
+                    c_one.setVisibility(View.GONE);
+                    c_two.setVisibility(View.GONE);
+                    c_three.setVisibility(View.GONE);
+
                     one.setVisibility(View.VISIBLE);
                     two.setVisibility(View.VISIBLE);
                     three.setVisibility(View.VISIBLE);
@@ -177,24 +206,22 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    et_adress.setVisibility(View.VISIBLE);
-                    et_adress_two.setVisibility(View.VISIBLE);
-                    et_adress_three.setVisibility(View.GONE);
-                    et_activities.setVisibility(View.VISIBLE);
-                    et_activities_two.setVisibility(View.VISIBLE);
-                    et_activities_three.setVisibility(View.GONE);
+
+                    c_one.setVisibility(View.VISIBLE);
+                    c_two.setVisibility(View.VISIBLE);
+                    c_three.setVisibility(View.GONE);
+
                     one.setVisibility(View.GONE);
                     three.setVisibility(View.GONE);
                     n_one.setVisibility(View.GONE);
                     n_two.setVisibility(View.VISIBLE);
                     n_three.setVisibility(View.GONE);
                 }else{
-                    et_adress.setVisibility(View.GONE);
-                    et_adress_two.setVisibility(View.GONE);
-                    et_adress_three.setVisibility(View.GONE);
-                    et_activities.setVisibility(View.GONE);
-                    et_activities_two.setVisibility(View.GONE);
-                    et_activities_three.setVisibility(View.GONE);
+
+                    c_one.setVisibility(View.GONE);
+                    c_two.setVisibility(View.GONE);
+                    c_three.setVisibility(View.GONE);
+
                     one.setVisibility(View.VISIBLE);
                     two.setVisibility(View.VISIBLE);
                     three.setVisibility(View.VISIBLE);
@@ -209,24 +236,22 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    et_adress.setVisibility(View.VISIBLE);
-                    et_adress_two.setVisibility(View.VISIBLE);
-                    et_adress_three.setVisibility(View.VISIBLE);
-                    et_activities.setVisibility(View.VISIBLE);
-                    et_activities_two.setVisibility(View.VISIBLE);
-                    et_activities_three.setVisibility(View.VISIBLE);
+
+                    c_one.setVisibility(View.VISIBLE);
+                    c_two.setVisibility(View.VISIBLE);
+                    c_three.setVisibility(View.VISIBLE);
+
                     one.setVisibility(View.GONE);
                     two.setVisibility(View.GONE);
                     n_one.setVisibility(View.GONE);
                     n_two.setVisibility(View.GONE);
                     n_three.setVisibility(View.VISIBLE);
                 }else{
-                    et_adress.setVisibility(View.GONE);
-                    et_adress_two.setVisibility(View.GONE);
-                    et_adress_three.setVisibility(View.GONE);
-                    et_activities.setVisibility(View.GONE);
-                    et_activities_two.setVisibility(View.GONE);
-                    et_activities_three.setVisibility(View.GONE);
+
+                    c_one.setVisibility(View.GONE);
+                    c_two.setVisibility(View.GONE);
+                    c_three.setVisibility(View.GONE);
+
                     one.setVisibility(View.VISIBLE);
                     two.setVisibility(View.VISIBLE);
                     three.setVisibility(View.VISIBLE);
@@ -272,10 +297,20 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 title = et_title.getText().toString();
                 description = et_description.getText().toString();
                 adress = et_adress.getText().toString();
+                adress_two = et_adress_two.getText().toString();
+                adress_three = et_adress_three.getText().toString();
                 date = et_date.getText().toString();
+                date_two = et_date_two.getText().toString();
+                date_three = et_date_three.getText().toString();
                 time = et_time.getText().toString();
+                time_two = et_time_two.getText().toString();
+                time_three = et_time_three.getText().toString();
                 tag = et_tag.getText().toString();
                 owner = "";
+                activities = et_activities.getText().toString();
+                activities_two = et_activities_two.getText().toString();
+                activities_three = et_activities_three.getText().toString();
+
 
                 FirebaseUser user = mAuth.getCurrentUser();
                 if(user != null){
@@ -288,9 +323,26 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                     return;
                 }
 
-                if(title.equals("") || description.equals("") || adress.equals("") || date.equals("") || time.equals("") || tag.equals("")){
-                    Snackbar.make(v,"Campo vacío", Snackbar.LENGTH_SHORT).show();
-                    return;
+                if(one.isChecked()){
+                    if(title.equals("") || description.equals("") || adress.equals("") || activities.equals("") || date.equals("") || time.equals("") || tag.equals("")){
+                        Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                if(two.isChecked()){
+                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || activities.equals("") || activities_two.equals("") || date.equals("") || date_two.equals("") || time.equals("") || time_two.equals("") || tag.equals("")){
+                        Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+
+                if(three.isChecked()){
+                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || adress_three.equals("") || activities.equals("") || activities_two.equals("") || activities_three.equals("") || date.equals("") || date_two.equals("") || date_three.equals("") || time.equals("") || time_two.equals("") || time_three.equals("") || tag.equals("")){
+                        Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 uploadPicture();
@@ -300,8 +352,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+        final Calendar calendar = Calendar.getInstance();
         if(v == btn_date){
-            final Calendar calendar = Calendar.getInstance();
             dia = calendar.get(Calendar.DAY_OF_MONTH);
             mes = calendar.get(Calendar.MONTH);
             anio = calendar.get(Calendar.YEAR);
@@ -316,8 +368,37 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             datePicker.show();
         }
 
+        if(v == btn_date_two){
+            dia = calendar.get(Calendar.DAY_OF_MONTH);
+            mes = calendar.get(Calendar.MONTH);
+            anio = calendar.get(Calendar.YEAR);
+
+            DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    et_date_two.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+                }
+            }
+                    ,dia, mes, anio);
+            datePicker.show();
+        }
+
+        if(v == btn_date_three){
+            dia = calendar.get(Calendar.DAY_OF_MONTH);
+            mes = calendar.get(Calendar.MONTH);
+            anio = calendar.get(Calendar.YEAR);
+
+            DatePickerDialog datePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    et_date_three.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+                }
+            }
+                    ,dia, mes, anio);
+            datePicker.show();
+        }
+
         if(v == btn_time){
-            final Calendar calendar = Calendar.getInstance();
             hora = calendar.get(Calendar.HOUR_OF_DAY);
             minutos = calendar.get(Calendar.MINUTE);
 
@@ -330,6 +411,38 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             timePicker.show();
 
         }
+
+        if(v == btn_time_two){
+            hora = calendar.get(Calendar.HOUR_OF_DAY);
+            minutos = calendar.get(Calendar.MINUTE);
+
+            TimePickerDialog timePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    et_time_two.setText(hourOfDay + ":" + minute);
+                }
+            },hora, minutos, false);
+            timePicker.show();
+
+        }
+
+
+        if(v == btn_time_three){
+            hora = calendar.get(Calendar.HOUR_OF_DAY);
+            minutos = calendar.get(Calendar.MINUTE);
+
+            TimePickerDialog timePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    et_time_three.setText(hourOfDay + ":" + minute);
+                }
+            },hora, minutos, false);
+            timePicker.show();
+
+        }
+
+
+
     }
 
     private void showToolbar(String title, boolean backButton){
@@ -398,18 +511,76 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "Subida completa", Toast.LENGTH_SHORT).show();
                     String imageURL = taskSnapshot.getDownloadUrl().toString();
-                    EventsModel evento = new EventsModel(title, description, imageURL, owner, emailOwner, adress, date, time, tag);
-                    reference.push().setValue(evento);
-                    Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
-                    startActivity(intent);
+                    if(one.isChecked()){
+                        EventsModel event = new EventsModel(title, description, imageURL, owner, emailOwner, adress, activities, date, time, tag);
+                        reference.push().setValue(event);
+                        Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                        startActivity(intent);
+                    }
+
+                    if(two.isChecked()){
+                        EventsModel event = new EventsModel(title, description, imageURL, owner, emailOwner, adress, activities, date, time, tag);
+                        event.setAdrees_two(adress_two);
+                        event.setActivities_two(activities_two);
+                        event.setDate_two(date_two);
+                        event.setTime_two(time_two);
+                        reference.push().setValue(event);
+                        Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                        startActivity(intent);
+                    }
+
+                    if(three.isChecked()){
+                        EventsModel event = new EventsModel(title, description, imageURL, owner, emailOwner, adress, activities, date, time, tag);
+                        event.setAdrees_two(adress_two);
+                        event.setAdress_three(adress_three);
+                        event.setActivities_two(activities_two);
+                        event.setActivities_three(activities_three);
+                        event.setDate_two(date_two);
+                        event.setDate_three(date_three);
+                        event.setTime_two(time_two);
+                        event.setTime_three(time_three);
+                        reference.push().setValue(event);
+                        Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                        startActivity(intent);
+                    }
+
                 }
             });
 
         }else{
-            EventsModel evento = new EventsModel(title, description, adress, owner, emailOwner, date, time, tag);
-            reference.push().setValue(evento);
-            Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
-            startActivity(intent);
+            if(one.isChecked()){
+                EventsModel event = new EventsModel(title, description, adress, activities, owner, emailOwner, date, time, tag);
+                reference.push().setValue(event);
+                Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                startActivity(intent);
+            }
+
+            if(two.isChecked()){
+                EventsModel event = new EventsModel(title, description, adress, activities, owner, emailOwner, date, time, tag);
+                event.setAdrees_two(adress_two);
+                event.setActivities_two(activities_two);
+                event.setDate_two(date_two);
+                event.setTime_two(time_two);
+                reference.push().setValue(event);
+                Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                startActivity(intent);
+            }
+
+            if(three.isChecked()){
+                EventsModel event = new EventsModel(title, description, adress, activities, owner, emailOwner, date, time, tag);
+                event.setAdrees_two(adress_two);
+                event.setAdress_three(adress_three);
+                event.setActivities_two(activities_two);
+                event.setActivities_three(activities_three);
+                event.setDate_two(date_two);
+                event.setDate_three(date_three);
+                event.setTime_two(time_two);
+                event.setTime_three(time_three);
+                reference.push().setValue(event);
+                Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
+                startActivity(intent);
+            }
+
         }
     }
 

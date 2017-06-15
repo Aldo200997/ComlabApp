@@ -30,6 +30,15 @@
         <item name="colorControlActivated">@color/black</item>
     </style>
 
+    <style name="EditTextEvents" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">#BDBDBD</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/black</item>
+    </style>
+
     <style name="RaisedButton" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/white</item>
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
@@ -54,7 +63,7 @@
     </style>
 
     <style name="Switch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">#E57373</item>
+        <item name="colorControlActivated">#64B5F6</item>
         <item name="colorSwitchThumbNormal">#f1f1f1</item>
         <item name="android:colorForeground">#42221f1f</item>
     </style>
