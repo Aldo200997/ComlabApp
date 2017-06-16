@@ -74,10 +74,16 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
                 intent.putExtra("key", eventsList.get(position).getKey());
                 intent.putExtra("title", eventsList.get(position).getTitle());
                 intent.putExtra("place", eventsList.get(position).getAdress());
+                intent.putExtra("place_two", eventsList.get(position).getAdrees_two());
+                intent.putExtra("place_three", eventsList.get(position).getAdress_three());
                 intent.putExtra("description", eventsList.get(position).getDescription());
                 intent.putExtra("image", eventsList.get(position).getImage());
                 intent.putExtra("date", eventsList.get(position).getDate());
+                intent.putExtra("date_two", eventsList.get(position).getDate_two());
+                intent.putExtra("date_three", eventsList.get(position).getDate_three());
                 intent.putExtra("time", eventsList.get(position).getTime());
+                intent.putExtra("time_two", eventsList.get(position).getTime_two());
+                intent.putExtra("time_three", eventsList.get(position).getTime_three());
                 activity.startActivity(intent);
             }
         });
