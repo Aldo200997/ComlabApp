@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -44,6 +45,8 @@ import com.project.comlab.comlabapp.Maps.MapsActivity;
 import com.project.comlab.comlabapp.POJO.EventsModel;
 import com.project.comlab.comlabapp.POJO.NewsModel;
 import com.project.comlab.comlabapp.R;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.Calendar;
@@ -79,9 +82,10 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     Button btn_add;
     Button photo;
     Button btn_tag;
-    Button btn_map;
 
     private int dia, mes, anio, hora, minutos;
+
+
 
     String path;
     Intent gallery = null;
@@ -100,6 +104,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     TextInputEditText et_date_two, et_date_three;
     TextInputEditText et_time_two, et_time_three;
     TextView n_one, n_two, n_three;
+
 
 
     // CardViews
@@ -149,6 +154,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         et_activities = (TextInputEditText) findViewById(R.id.add_event_activities);
         et_activities_two = (TextInputEditText) findViewById(R.id.add_event_activities_two);
         et_activities_three = (TextInputEditText) findViewById(R.id.add_event_activities_three);
+
 
         c_one = (CardView) findViewById(R.id.card_one);
         c_two = (CardView) findViewById(R.id.card_two);
@@ -280,14 +286,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        btn_map = (Button) findViewById(R.id.add_event_button_map);
-        btn_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddEventActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         btn_add = (Button) findViewById(R.id.add_event_btn);
         btn_add.setOnClickListener(new View.OnClickListener() {
@@ -324,7 +322,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 }
 
                 if(one.isChecked()){
-                    if(title.equals("") || description.equals("") || adress.equals("") || activities.equals("") || date.equals("") || time.equals("") || tag.equals("")){
+                    if(title.equals("") || description.equals("") || adress.equals("") || activities.equals("") || date.equals("") || time.equals("") || tag.equals("") ){
                         Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
                         return;
                     }

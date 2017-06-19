@@ -1,7 +1,10 @@
 package com.project.comlab.comlabapp.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -22,6 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.project.comlab.comlabapp.Adapters.RecyclerCommentsAdapter;
 import com.project.comlab.comlabapp.POJO.CommentsModel;
 import com.project.comlab.comlabapp.POJO.EventsModel;
@@ -31,13 +41,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
 public class EventDetailActivity extends AppCompatActivity {
 
-    TextView tv_title, tv_place, tv_place_two, tv_place_three, tv_date, tv_date_two, tv_date_three, tv_time, tv_time_two, tv_time_three;
+    TextView tv_title, tv_place, tv_place_two, tv_place_three, tv_date, tv_date_two, tv_date_three, tv_time, tv_time_two, tv_time_three, tv_members, tv_members_two, tv_members_three;
     JustifiedTextView tv_description;
     ImageView iv_image;
     Button btn_comment;
+    Button event_one, event_two, event_three;
     TextInputEditText et_comment;
+    ImageView qr;
+    Button qr_read;
 
     String key = "";
     RecyclerView rv_comments;
@@ -49,6 +64,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+
+    String values;
 
 
 
@@ -76,6 +93,16 @@ public class EventDetailActivity extends AppCompatActivity {
         rv_comments = (RecyclerView) findViewById(R.id.event_rv_comments_detail);
         et_comment = (TextInputEditText) findViewById(R.id.event_et_comment_detail);
         btn_comment = (Button) findViewById(R.id.event_btn_comment_detail);
+        tv_members = (TextView) findViewById(R.id.event_members_detail);
+        tv_members_two = (TextView) findViewById(R.id.event_members_two_detail);
+        tv_members_three = (TextView) findViewById(R.id.event_members_three_detail);
+
+        qr = (ImageView) findViewById(R.id.event_qr_detail);
+        qr_read = (Button) findViewById(R.id.event_qr_read_detail);
+
+        event_one = (Button) findViewById(R.id.event_one_btn_detail);
+        event_two = (Button) findViewById(R.id.event_two_btn_detail);
+        event_three = (Button) findViewById(R.id.event_three_btn_detail);
 
         one = (CardView) findViewById(R.id.card_detail_one);
         two = (CardView) findViewById(R.id.card_detail_two);
@@ -107,6 +134,10 @@ public class EventDetailActivity extends AppCompatActivity {
             String time_three = extras.getString("time_three");
             String description = extras.getString("description");
             String image = extras.getString("image");
+            String members = extras.getString("members");
+            String members_two = extras.getString("members_two");
+            String members_three = extras.getString("members_three");
+            values = title + " " + place + " " + date;
 
             if(place != null  && place_two == null && place_three == null){
                 one.setVisibility(View.VISIBLE);
@@ -133,9 +164,6 @@ public class EventDetailActivity extends AppCompatActivity {
             }
 
 
-
-
-
             tv_title.setText(title);
             tv_place.setText(place);
             tv_place_two.setText(place_two);
@@ -147,6 +175,9 @@ public class EventDetailActivity extends AppCompatActivity {
             tv_time.setText(time);
             tv_time_two.setText(time_two);
             tv_time_three.setText(time_three);
+            tv_members.setText(members);
+            tv_members_two.setText(members_two);
+            tv_members_three.setText(members_three);
             Picasso.with(getApplicationContext()).load(image).into(iv_image);
         }
 
@@ -166,6 +197,34 @@ public class EventDetailActivity extends AppCompatActivity {
                 CommentsModel comment = new CommentsModel(text, eOwner);
                 reference.child(key).push().setValue(comment);
 
+            }
+        });
+
+        event_one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generateQR();
+            }
+        });
+
+        event_two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        event_three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        qr_read.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readQR();
             }
         });
 
@@ -191,5 +250,62 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void generateQR(){
+        MultiFormatWriter mfw = new MultiFormatWriter();
+
+        try{
+            BitMatrix bitMatrix = mfw.encode(values, BarcodeFormat.QR_CODE, 200, 200);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap = encoder.createBitmap(bitMatrix);
+            qr.setImageBitmap(bitmap);
+        }catch(WriterException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void readQR(){
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("escanear");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(false);
+        integrator.setBarcodeImageEnabled(false);
+        integrator.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if(result != null){
+
+            if(result.getContents() == null){
+                Toast.makeText(getApplicationContext(), "Cancelaste el escaneo", Toast.LENGTH_SHORT).show();
+            }else{
+                showAlert(result.getContents());
+            }
+
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
+    private void showAlert(String value){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Escaneo de QR");
+        View view = this.getLayoutInflater().inflate(R.layout.item_dialog_qr, null);
+
+        final TextView tv = (TextView) view.findViewById(R.id.tv_qr);
+        tv.setText(value);
+
+        alert.setCancelable(true);
+
+        AlertDialog dialog = alert.create();
+        dialog.setView(view);
+
+        dialog.show();
     }
 }
