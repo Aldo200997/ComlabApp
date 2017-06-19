@@ -82,7 +82,12 @@ public class EventDetailActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("comments").child("events");
+        refereceMembers = database.getReference("events");
         mAuth = FirebaseAuth.getInstance();
+
+        members = 0;
+        members_two = 0;
+        members_three = 0;
 
         tv_title = (TextView) findViewById(R.id.event_title_detail);
         tv_place = (TextView) findViewById(R.id.event_place_detail);
@@ -228,6 +233,7 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
+
         qr_read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -255,18 +261,20 @@ public class EventDetailActivity extends AppCompatActivity {
          });
 
 
-
-
     }
 
     private void generateQR(){
 
-        refereceMembers = database.getReference("events").child(key).child("member_one");
-        refereceMembers.addValueEventListener(new ValueEventListener() {
+        refereceMembers.child(key).child("member_one").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                members = dataSnapshot.getValue(Integer.class);
-                tv_members.setText("" + members);
+                try{
+                    members = dataSnapshot.getValue(Integer.class);
+                    tv_members.setText("" + members);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -279,8 +287,7 @@ public class EventDetailActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Ya no hay lugares disponibles", Toast.LENGTH_SHORT).show();
             return;
         }
-        members = members - 1;
-        refereceMembers.setValue(members);
+        refereceMembers.child(key).child("member_one").setValue(members - 1);
 
 
         MultiFormatWriter mfw = new MultiFormatWriter();
