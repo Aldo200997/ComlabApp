@@ -31,9 +31,9 @@ public class EventsModel {
     private String time_three;
     private String tag;
     private String key;
-    private int members;
-    private int members_two;
-    private int members_three;
+    private int member_one;
+    private int member_two;
+    private int member_three;
 
     public EventsModel(){}
 
@@ -222,28 +222,28 @@ public class EventsModel {
         this.time_three = time_three;
     }
 
-    public int getMembers() {
-        return members;
+    public int getMember_one() {
+        return member_one;
     }
 
-    public void setMembers(int members) {
-        this.members = members;
+    public void setMember_one(int member_one) {
+        this.member_one = member_one;
     }
 
-    public int getMembers_two() {
-        return members_two;
+    public int getMember_two() {
+        return member_two;
     }
 
-    public void setMembers_two(int members_two) {
-        this.members_two = members_two;
+    public void setMember_two(int member_two) {
+        this.member_two = member_two;
     }
 
-    public int getMembers_three() {
-        return members_three;
+    public int getMember_three() {
+        return member_three;
     }
 
-    public void setMembers_three(int members_three) {
-        this.members_three = members_three;
+    public void setMember_three(int member_three) {
+        this.member_three = member_three;
     }
 
     public void setValues(EventsModel event){
@@ -252,6 +252,8 @@ public class EventsModel {
         this.adress = event.adress;
         this.date = event.date;
         this.time = event.time;
+        this.member_one = event.member_one;
+        this.tag = event.tag;
     }
 
 }

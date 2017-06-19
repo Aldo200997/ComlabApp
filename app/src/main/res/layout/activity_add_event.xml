@@ -242,6 +242,30 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/people"
+                            android:layout_marginTop="5dp"/>
+
+                        <EditText
+                            android:id="@+id/add_event_members_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents"
+                            android:hint="Num Personas"
+                            android:inputType="number"
+                            android:digits="0123456789"/>
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -339,6 +363,29 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Agrega una hora" />
                         </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/people"
+                            android:layout_marginTop="5dp"/>
+
+                        <EditText
+                            android:id="@+id/add_event_members_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents"
+                            android:hint="Num Personas"
+                            android:inputType="number"
+                            android:digits="0123456789"/>
 
                     </LinearLayout>
 
@@ -440,6 +487,30 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Agrega una hora" />
                         </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <Button
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/people"
+                            android:layout_marginTop="5dp"/>
+
+
+                        <EditText
+                            android:id="@+id/add_event_members_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/EditTextEvents"
+                            android:hint="Num Personas"
+                            android:inputType="number"
+                            android:digits="0123456789"/>
 
                     </LinearLayout>
 

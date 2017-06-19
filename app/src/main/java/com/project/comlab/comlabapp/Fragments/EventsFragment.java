@@ -112,11 +112,12 @@ public class EventsFragment extends Fragment {
                 String key = dataSnapshot.getKey();
                 EventsModel event = dataSnapshot.getValue(EventsModel.class);
                 for (EventsModel em: eventList) {
-                    if(event.getKey().equals(key)){
+                    if(em.getKey().equals(key)){
                         em.setValues(event);
                         adapter.notifyDataSetChanged();
                     }
                 }
+
             }
 
             @Override

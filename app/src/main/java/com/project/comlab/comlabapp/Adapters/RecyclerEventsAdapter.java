@@ -3,6 +3,8 @@ package com.project.comlab.comlabapp.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -84,9 +86,9 @@ public class RecyclerEventsAdapter extends RecyclerView.Adapter<RecyclerEventsAd
                 intent.putExtra("time", eventsList.get(position).getTime());
                 intent.putExtra("time_two", eventsList.get(position).getTime_two());
                 intent.putExtra("time_three", eventsList.get(position).getTime_three());
-                /*intent.putExtra("members", eventsList.get(position).getMembers());
-                intent.putExtra("members_two", eventsList.get(position).getMembers_two());
-                intent.putExtra("members_three", eventsList.get(position).getMembers_three());*/
+                intent.putExtra("members", eventsList.get(position).getMember_one());
+                intent.putExtra("members_two", eventsList.get(position).getMember_two());
+                intent.putExtra("members_three", eventsList.get(position).getMember_three());
                 activity.startActivity(intent);
             }
         });

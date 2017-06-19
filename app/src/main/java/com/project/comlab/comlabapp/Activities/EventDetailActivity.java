@@ -2,7 +2,9 @@ package com.project.comlab.comlabapp.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codesgood.views.JustifiedTextView;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -63,9 +66,12 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference refereceMembers;
     private FirebaseAuth mAuth;
 
     String values;
+
+    int members, members_two, members_three;
 
 
 
@@ -114,6 +120,7 @@ public class EventDetailActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
 
 
+
         rv_comments.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         commentsList = new ArrayList<>();
         adapter = new RecyclerCommentsAdapter(EventDetailActivity.this, getApplicationContext(),commentsList);
@@ -134,9 +141,9 @@ public class EventDetailActivity extends AppCompatActivity {
             String time_three = extras.getString("time_three");
             String description = extras.getString("description");
             String image = extras.getString("image");
-            String members = extras.getString("members");
-            String members_two = extras.getString("members_two");
-            String members_three = extras.getString("members_three");
+            members = extras.getInt("members");
+            members_two = extras.getInt("members_two");
+            members_three = extras.getInt("members_three");
             values = title + " " + place + " " + date;
 
             if(place != null  && place_two == null && place_three == null){
@@ -175,9 +182,9 @@ public class EventDetailActivity extends AppCompatActivity {
             tv_time.setText(time);
             tv_time_two.setText(time_two);
             tv_time_three.setText(time_three);
-            tv_members.setText(members);
-            tv_members_two.setText(members_two);
-            tv_members_three.setText(members_three);
+            tv_members.setText("" + members);
+            tv_members_two.setText("" + members_two);
+            tv_members_three.setText("" + members_three);
             Picasso.with(getApplicationContext()).load(image).into(iv_image);
         }
 
@@ -253,6 +260,29 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void generateQR(){
+
+        refereceMembers = database.getReference("events").child(key).child("member_one");
+        refereceMembers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                members = dataSnapshot.getValue(Integer.class);
+                tv_members.setText("" + members);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if(members <= 0){
+            Toast.makeText(getApplicationContext(), "Ya no hay lugares disponibles", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        members = members - 1;
+        refereceMembers.setValue(members);
+
+
         MultiFormatWriter mfw = new MultiFormatWriter();
 
         try{

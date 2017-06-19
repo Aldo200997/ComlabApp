@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -60,6 +61,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     private StorageReference storageReference;
 
     TextInputEditText et_title, et_description, et_adress, et_date, et_time, et_tag, et_activities;
+    EditText et_members, et_members_two, et_members_three;
     String title;
     String description;
     String adress;
@@ -77,6 +79,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     String tag;
     String owner;
     String emailOwner;
+    String members, members_two, members_three;
+    int member, member_two, member_three;
 
     Button btn_date, btn_date_two, btn_date_three, btn_time, btn_time_two, btn_time_three;
     Button btn_add;
@@ -154,6 +158,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         et_activities = (TextInputEditText) findViewById(R.id.add_event_activities);
         et_activities_two = (TextInputEditText) findViewById(R.id.add_event_activities_two);
         et_activities_three = (TextInputEditText) findViewById(R.id.add_event_activities_three);
+        et_members = (EditText) findViewById(R.id.add_event_members_one);
+        et_members_two = (EditText) findViewById(R.id.add_event_members_two);
+        et_members_three = (EditText) findViewById(R.id.add_event_members_three);
 
 
         c_one = (CardView) findViewById(R.id.card_one);
@@ -308,6 +315,20 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 activities = et_activities.getText().toString();
                 activities_two = et_activities_two.getText().toString();
                 activities_three = et_activities_three.getText().toString();
+                members = et_members.getText().toString();
+                members_two = et_members_two.getText().toString();
+                members_three = et_members_three.getText().toString();
+
+
+                try{
+                    member = Integer.parseInt(et_members.getText().toString());
+                    member_two = Integer.parseInt(et_members_two.getText().toString());
+                    member_three = Integer.parseInt(et_members_three.getText().toString());
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+
 
 
                 FirebaseUser user = mAuth.getCurrentUser();
@@ -322,14 +343,14 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 }
 
                 if(one.isChecked()){
-                    if(title.equals("") || description.equals("") || adress.equals("") || activities.equals("") || date.equals("") || time.equals("") || tag.equals("") ){
+                    if(title.equals("") || description.equals("") || adress.equals("") || activities.equals("") || date.equals("") || time.equals("") || tag.equals("") || members.equals("") ){
                         Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
                         return;
                     }
                 }
 
                 if(two.isChecked()){
-                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || activities.equals("") || activities_two.equals("") || date.equals("") || date_two.equals("") || time.equals("") || time_two.equals("") || tag.equals("")){
+                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || activities.equals("") || activities_two.equals("") || date.equals("") || date_two.equals("") || time.equals("") || time_two.equals("") || tag.equals("") || members.equals("") || members_two.equals("")){
                         Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
                         return;
                     }
@@ -337,7 +358,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
 
                 if(three.isChecked()){
-                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || adress_three.equals("") || activities.equals("") || activities_two.equals("") || activities_three.equals("") || date.equals("") || date_two.equals("") || date_three.equals("") || time.equals("") || time_two.equals("") || time_three.equals("") || tag.equals("")){
+                    if(title.equals("") || description.equals("") || adress.equals("") || adress_two.equals("") || adress_three.equals("") || activities.equals("") || activities_two.equals("") || activities_three.equals("") || date.equals("") || date_two.equals("") || date_three.equals("") || time.equals("") || time_two.equals("") || time_three.equals("") || tag.equals("") || members.equals("") || members_two.equals("") || members_three.equals("")){
                         Snackbar.make(v,"Campos vacíos", Snackbar.LENGTH_SHORT).show();
                         return;
                     }
@@ -511,6 +532,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                     String imageURL = taskSnapshot.getDownloadUrl().toString();
                     if(one.isChecked()){
                         EventsModel event = new EventsModel(title, description, imageURL, owner, emailOwner, adress, activities, date, time, tag);
+                        event.setMember_one(member);
                         reference.push().setValue(event);
                         Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                         startActivity(intent);
@@ -522,6 +544,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                         event.setActivities_two(activities_two);
                         event.setDate_two(date_two);
                         event.setTime_two(time_two);
+                        event.setMember_one(member);
+                        event.setMember_two(member_two);
                         reference.push().setValue(event);
                         Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                         startActivity(intent);
@@ -537,6 +561,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                         event.setDate_three(date_three);
                         event.setTime_two(time_two);
                         event.setTime_three(time_three);
+                        event.setMember_one(member);
+                        event.setMember_two(member_two);
+                        event.setMember_three(member_three);
                         reference.push().setValue(event);
                         Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                         startActivity(intent);
@@ -548,6 +575,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         }else{
             if(one.isChecked()){
                 EventsModel event = new EventsModel(title, description, adress, activities, owner, emailOwner, date, time, tag);
+                event.setMember_one(member);
                 reference.push().setValue(event);
                 Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                 startActivity(intent);
@@ -559,6 +587,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 event.setActivities_two(activities_two);
                 event.setDate_two(date_two);
                 event.setTime_two(time_two);
+                event.setMember_one(member);
+                event.setMember_two(member_two);
                 reference.push().setValue(event);
                 Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                 startActivity(intent);
@@ -574,6 +604,9 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 event.setDate_three(date_three);
                 event.setTime_two(time_two);
                 event.setTime_three(time_three);
+                event.setMember_one(member);
+                event.setMember_two(member_two);
+                event.setMember_three(member_three);
                 reference.push().setValue(event);
                 Intent intent = new Intent(AddEventActivity.this, ContainerActivity.class);
                 startActivity(intent);
