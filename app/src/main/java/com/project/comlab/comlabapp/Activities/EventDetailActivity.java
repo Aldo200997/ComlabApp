@@ -1,10 +1,15 @@
 package com.project.comlab.comlabapp.Activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codesgood.views.JustifiedTextView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +35,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -38,10 +48,14 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.project.comlab.comlabapp.Adapters.RecyclerCommentsAdapter;
 import com.project.comlab.comlabapp.POJO.CommentsModel;
 import com.project.comlab.comlabapp.POJO.EventsModel;
+import com.project.comlab.comlabapp.POJO.QRModel;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -67,13 +81,17 @@ public class EventDetailActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference refereceMembers;
+    private DatabaseReference qrReference;
     private FirebaseAuth mAuth;
+    private FirebaseStorage storage;
+    private StorageReference sReferece;
 
-    String values;
+    String values, values_two, values_three;
 
     int members, members_two, members_three;
 
-
+    boolean haveTicket;
+    String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +101,10 @@ public class EventDetailActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("comments").child("events");
         refereceMembers = database.getReference("events");
+        qrReference = database.getReference("qr");
         mAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+        sReferece = storage.getReference("qrs");
 
         members = 0;
         members_two = 0;
@@ -119,18 +140,13 @@ public class EventDetailActivity extends AppCompatActivity {
         two = (CardView) findViewById(R.id.card_detail_two);
         three = (CardView) findViewById(R.id.card_detail_three);
 
-
-
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-
-
 
         rv_comments.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         commentsList = new ArrayList<>();
         adapter = new RecyclerCommentsAdapter(EventDetailActivity.this, getApplicationContext(),commentsList);
         rv_comments.setAdapter(adapter);
-
 
         if(extras != null){
             key = extras.getString("key");
@@ -149,7 +165,15 @@ public class EventDetailActivity extends AppCompatActivity {
             members = extras.getInt("members");
             members_two = extras.getInt("members_two");
             members_three = extras.getInt("members_three");
-            values = title + " " + place + " " + date;
+
+
+            FirebaseUser user = mAuth.getCurrentUser();
+            String owner = user.getEmail();
+            values = "Nombre del evento: " + title + "\n" + "Lugar: " + place + "\n" + "Fecha: " + date + "\n" + "Dueño del boleto: " + owner;
+            values_two = "Nombre del evento: " + tv_title.getText().toString() + "\n" + "Lugar: " + place_two + "\n" + "Fecha: " + date_two + "\n" + "Dueño del boleto: " + owner;
+            values_three = "Nombre del evento: " + title + "\n" + "Lugar: " + place_three + "\n" + "Fecha: " + date_three + "\n" + "Dueño del boleto: " + owner;
+
+
 
             if(place != null  && place_two == null && place_three == null){
                 one.setVisibility(View.VISIBLE);
@@ -193,7 +217,39 @@ public class EventDetailActivity extends AppCompatActivity {
             Picasso.with(getApplicationContext()).load(image).into(iv_image);
         }
 
-         btn_comment.setOnClickListener(new View.OnClickListener() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        qrReference.child(user.getUid()).child(key).child("state").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    haveTicket = dataSnapshot.getValue(Boolean.class);
+
+                    if(haveTicket){
+                        event_one.setVisibility(View.GONE);
+                        event_two.setVisibility(View.GONE);
+                        event_three.setVisibility(View.GONE);
+
+                    }else{
+                        event_one.setVisibility(View.VISIBLE);
+                        event_two.setVisibility(View.VISIBLE);
+                        event_three.setVisibility(View.VISIBLE);
+
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        btn_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -222,14 +278,14 @@ public class EventDetailActivity extends AppCompatActivity {
         event_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                generateQRTwo();
             }
         });
 
         event_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                generateQRThree();
             }
         });
 
@@ -242,7 +298,7 @@ public class EventDetailActivity extends AppCompatActivity {
         });
 
 
-         reference.child(key).addValueEventListener(new ValueEventListener() {
+        reference.child(key).addValueEventListener(new ValueEventListener() {
              @Override
              public void onDataChange(DataSnapshot dataSnapshot) {
                  commentsList.removeAll(commentsList);
@@ -264,6 +320,7 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void generateQR(){
+
 
         refereceMembers.child(key).child("member_one").addValueEventListener(new ValueEventListener() {
             @Override
@@ -287,6 +344,9 @@ public class EventDetailActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Ya no hay lugares disponibles", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        final FirebaseUser user = mAuth.getCurrentUser();
+        qrReference.child(user.getUid()).child(key).child("state").setValue(true);
         refereceMembers.child(key).child("member_one").setValue(members - 1);
 
 
@@ -297,6 +357,94 @@ public class EventDetailActivity extends AppCompatActivity {
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(bitMatrix);
             qr.setImageBitmap(bitmap);
+            pushQRCode(bitmap);
+        }catch(WriterException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void generateQRTwo(){
+
+
+
+        refereceMembers.child(key).child("member_two").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    members_two = dataSnapshot.getValue(Integer.class);
+                    tv_members_two.setText("" + members_two);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if(members_two <= 0){
+            Toast.makeText(getApplicationContext(), "Ya no hay lugares disponibles", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final FirebaseUser user = mAuth.getCurrentUser();
+        qrReference.child(user.getUid()).child(key).child("state").setValue(true);
+        refereceMembers.child(key).child("member_two").setValue(members_two - 1);
+
+
+        MultiFormatWriter mfw = new MultiFormatWriter();
+
+        try{
+            BitMatrix bitMatrix = mfw.encode(values_two, BarcodeFormat.QR_CODE, 200, 200);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap = encoder.createBitmap(bitMatrix);
+            qr.setImageBitmap(bitmap);
+            pushQRCode(bitmap);
+        }catch(WriterException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void generateQRThree(){
+
+        refereceMembers.child(key).child("member_three").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try{
+                    members_three = dataSnapshot.getValue(Integer.class);
+                    tv_members_three.setText("" + members_three);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if(members_three <= 0){
+            Toast.makeText(getApplicationContext(), "Ya no hay lugares disponibles", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final FirebaseUser user = mAuth.getCurrentUser();
+        qrReference.child(user.getUid()).child(key).child("state").setValue(true);
+        refereceMembers.child(key).child("member_three").setValue(members_three - 1);
+
+
+        MultiFormatWriter mfw = new MultiFormatWriter();
+
+        try{
+            BitMatrix bitMatrix = mfw.encode(values_three, BarcodeFormat.QR_CODE, 200, 200);
+            BarcodeEncoder encoder = new BarcodeEncoder();
+            Bitmap bitmap = encoder.createBitmap(bitMatrix);
+            qr.setImageBitmap(bitmap);
+            pushQRCode(bitmap);
         }catch(WriterException e){
             e.printStackTrace();
         }
@@ -324,9 +472,12 @@ public class EventDetailActivity extends AppCompatActivity {
                 showAlert(result.getContents());
             }
 
+
+
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+
 
     }
 
@@ -345,4 +496,56 @@ public class EventDetailActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    private void pushQRCode(Bitmap imageBitmap){
+
+        final FirebaseUser userQR = mAuth.getCurrentUser();
+
+        Uri imageUri = getImageUri(getApplicationContext(), imageBitmap);
+        File imageFile = new File(getRealPathFromURI(imageUri));
+        path = imageFile.getAbsolutePath();
+
+        File imageFinal = new File(path);
+        Uri uriFinal = Uri.fromFile(imageFinal);
+
+
+        StorageReference QRreference = sReferece.child("qr_" + uriFinal.getLastPathSegment());
+        UploadTask task = QRreference.putFile(uriFinal);
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "No se pudo subir tu qr", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getApplicationContext(), "Tu qr se subió exitosamente", Toast.LENGTH_SHORT).show();
+                String imageQR = taskSnapshot.getDownloadUrl().toString();
+                qrReference.child(userQR.getUid()).child(key).child("url").setValue(imageQR);
+            }
+        });
+
+    }
+
 }

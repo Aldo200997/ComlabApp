@@ -128,6 +128,7 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         return newsList.size();
     }
 
+
     @Override
     public Filter getFilter() {
 
@@ -137,6 +138,8 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         }
         return filter;
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -169,5 +172,13 @@ public class RecyclerNewsAdapter extends RecyclerView.Adapter<RecyclerNewsAdapte
         public void setItemClickListener(ItemClickListener ic){
             this.itemClickListener = ic;
         }
+
+
     }
+
+
+
+
 }
+
+
