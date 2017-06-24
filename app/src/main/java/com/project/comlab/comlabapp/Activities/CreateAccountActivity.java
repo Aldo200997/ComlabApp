@@ -2,6 +2,7 @@ package com.project.comlab.comlabapp.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.create_account_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 /* Intent intent = new Intent(CreateAccountActivity.this, InterestedActivity.class);
                 startActivity(intent); */
 
@@ -64,18 +65,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                 String password = et_password.getText().toString();
                 String password_repeat = et_password_repeat.getText().toString();
 
-                if(email.equals("") || email_repeat.equals("") || username.equals("") || password.equals("") || password_repeat.equals("")){
-                    Toast.makeText(getApplicationContext(), "Campo vacío", Toast.LENGTH_SHORT).show();
+                if(email.isEmpty() || email_repeat.isEmpty() || username.isEmpty() || password.isEmpty() || password_repeat.isEmpty()){
+                    Snackbar.make(v, "Campo vacío", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(!email.equals(email_repeat)){
-                    Toast.makeText(getApplicationContext(), "Los correos no coinciden", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Los correos no coinciden", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(!password.equals(password_repeat)){
-                    Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Las contraseñas no coinciden", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -86,7 +87,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     updateProfile();
                                 }else{
-                                    Toast.makeText(getApplicationContext(), "No se pudo crear el usuario", Toast.LENGTH_SHORT).show();
+                                    Snackbar.make(v, "No se pudo crear el usuario", Snackbar.LENGTH_SHORT).show();
                                 }
 
                             }

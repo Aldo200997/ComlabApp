@@ -19,64 +19,86 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="12dp">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
+                android:theme="@style/EditTextLogin">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/create_account_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/login_email_str"/>
+                    android:hint="@string/login_email_str"
+                    android:lines="1"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
+                android:theme="@style/EditTextLogin"
+                android:layout_marginTop="10dp">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/create_account_email_repeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/create_account_email_repeat_str"/>
+                    android:hint="@string/create_account_email_repeat_str"
+                    android:lines="1"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
+                android:theme="@style/EditTextLogin"
+                android:layout_marginTop="10dp">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/create_account_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/create_account_username_str"/>
+                    android:hint="@string/create_account_username_str"
+                    android:lines="1"/>
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/create_account_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/login_password_str"
-                    android:inputType="textPassword"/>
-            </android.support.design.widget.TextInputLayout>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextBlack">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/create_account_password_repeat"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="@string/create_account_password_repeat_str"/>
-            </android.support.design.widget.TextInputLayout>
+                    android:theme="@style/EditTextLogin"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#BDBDBD">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/create_account_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/login_password_str"
+                        android:inputType="textPassword"
+                        android:lines="1"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/EditTextLogin"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#BDBDBD">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/create_account_password_repeat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:hint="@string/create_account_password_repeat_str"
+                        android:lines="1"/>
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/create_account_btn"
@@ -84,7 +106,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/create_account_register_str"
                 android:theme="@style/RaisedButton"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"/>
 
         </LinearLayout>
 

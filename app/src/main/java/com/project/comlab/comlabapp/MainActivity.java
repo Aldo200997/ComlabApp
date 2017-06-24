@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); */
 
                 String email = et_email.getText().toString().trim();
-                String password = et_password.getText().toString().trim();
+                String password = et_password.getText().toString();
 
                 if(email.isEmpty()){
                     et_email.requestFocus();
