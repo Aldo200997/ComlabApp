@@ -17,6 +17,7 @@ import com.project.comlab.comlabapp.ProfileConfig.EditProfileActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyEventsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyNewsActivity;
 import com.project.comlab.comlabapp.ProfileConfig.MyProjectsActivity;
+import com.project.comlab.comlabapp.ProfileConfig.MyQrsActivity;
 import com.project.comlab.comlabapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -106,6 +107,11 @@ public class RecyclerProfileAdapter extends RecyclerView.Adapter<RecyclerProfile
                             intent = new Intent(activity, MyProjectsActivity.class);
                             activity.startActivity(intent);
                             break;
+
+                        /*case 4:
+                            intent = new Intent(activity, MyQrsActivity.class);
+                            activity.startActivity(intent);
+                            break;*/
 
 
 

@@ -5,18 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.project.comlab.comlabapp.MainActivity"
-    android:background="@color/colorPrimary">
+    tools:context="com.project.comlab.comlabapp.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
+
         <RelativeLayout
+            android:id="@+id/login_relative"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.6">
+            android:layout_weight="0.65"
+            android:background="@color/colorPrimary">
             <ImageView
                 android:layout_width="220dp"
                 android:layout_height="100dp"
@@ -28,20 +30,23 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:layout_weight="0.4">
+            android:layout_weight="0.35"
+            android:fillViewport="true">
 
             <LinearLayout
+                android:id="@+id/login_linear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="24dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/EditTextWhite">
+                    android:theme="@style/EditTextLogin">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/login_email"
                         android:layout_width="match_parent"
@@ -53,55 +58,64 @@
                     android:id="@+id/layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/EditTextWhite">
+                    android:layout_marginTop="20dp"
+                    android:theme="@style/EditTextLogin"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="#BDBDBD">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/login_password_str"
-                        android:inputType="textPassword"/>
+                        android:inputType="textPassword" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="@string/login_button_str"
-                    android:theme="@style/RaisedButton"
-                    android:layout_marginTop="20dp"/>
+                    android:theme="@style/RaisedButton" />
 
                 <Button
                     android:id="@+id/login_go"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Ir a inicio"
-                    android:theme="@style/RaisedButton"
-                    android:layout_marginTop="5dp"/>
+                    android:theme="@style/RaisedButton" />
 
                 <Button
                     android:id="@+id/signOut_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Cerrar sesión"
-                    android:theme="@style/RaisedButton"
-                    android:layout_marginTop="5dp"/>
+                    android:theme="@style/RaisedButton" />
 
                 <Button
                     android:id="@+id/login_button_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/login_register_str"
-                    android:theme="@style/RaisedButton"
-                    android:layout_marginTop="5dp"/>
+                    android:theme="@style/RaisedButtonGreen" />
 
-                <TextView
-                    android:id="@+id/login_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:text="Estado"/>
+
+                    <TextView
+                        android:id="@+id/login_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Estado"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_marginTop="5dp"/>
+
 
             </LinearLayout>
 

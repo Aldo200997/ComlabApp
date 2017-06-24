@@ -84,8 +84,8 @@ public class ProfileFragment extends Fragment {
         itemList.add(new ItemsProfileModel("Mis aportes", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofiledos.png?alt=media&token=be359f9e-b3bc-4ec2-9c97-cdd9136222f5"));
         itemList.add(new ItemsProfileModel("Mis eventos", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofilecinco.png?alt=media&token=e977a8ac-41f8-4cb1-a9ba-829d3ffd6e6b"));
         itemList.add(new ItemsProfileModel("Mis proyectos", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofilecuatro.png?alt=media&token=7b717295-3597-43fa-9ae2-e5b7999d04e4"));
-        itemList.add(new ItemsProfileModel("Mis likes", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofilelikes.png?alt=media&token=b4e94d20-cdc1-4147-8313-67050d179da0"));
-        itemList.add(new ItemsProfileModel("Mis amigos", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofilefriend.png?alt=media&token=b50cc509-bbf0-4ce3-8285-843bfb1f27a4"));
+        //itemList.add(new ItemsProfileModel("Mis likes", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2Fprofilelikes.png?alt=media&token=b4e94d20-cdc1-4147-8313-67050d179da0"));
+        itemList.add(new ItemsProfileModel("Mis QR", "https://firebasestorage.googleapis.com/v0/b/comlabapplication.appspot.com/o/profileImages%2FqrCode.png?alt=media&token=18917688-ddcc-42b0-946a-0c1adeabee01"));
     }
 
 

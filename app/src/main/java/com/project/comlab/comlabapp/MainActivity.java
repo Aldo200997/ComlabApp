@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     TextInputEditText et_email, et_password;
     TextInputLayout la_email, la_password;
+    RelativeLayout rl;
+    LinearLayout ly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,43 @@ public class MainActivity extends AppCompatActivity {
         la_password = (TextInputLayout) findViewById(R.id.layout_password);
         et_email = (TextInputEditText) findViewById(R.id.login_email);
         et_password = (TextInputEditText) findViewById(R.id.login_password);
+        rl = (RelativeLayout) findViewById(R.id.login_relative);
+        ly = (LinearLayout) findViewById(R.id.login_linear);
 
         updateState();
+
+
+        et_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    rl.setVisibility(View.GONE);
+                }else{
+                    rl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        et_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    rl.setVisibility(View.GONE);
+                }else{
+                    rl.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+        // Click en cualquier parte del linear regresa el relative, que es donde esta el logo
+
+        ly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rl.setVisibility(View.VISIBLE);
+            }
+        });
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +113,15 @@ public class MainActivity extends AppCompatActivity {
                 String email = et_email.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
 
-                if(email.equals("")){
-                    Snackbar.make(v,"email vacío", Snackbar.LENGTH_SHORT).show();
+                if(email.isEmpty()){
+                    et_email.requestFocus();
+                    Snackbar.make(v, "Coreo vacío", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(password.equals("")){
-                    Snackbar.make(v,"contraseña vacía", Snackbar.LENGTH_SHORT).show();
+                if(password.isEmpty()){
+                    et_password.requestFocus();
+                    Snackbar.make(v,"Contraseña vacía", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -150,4 +191,5 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
     }
+
 }
